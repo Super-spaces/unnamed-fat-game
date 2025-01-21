@@ -1,0 +1,115 @@
+:: StoryData {"position":"1625,700"}
+{
+    "ifid": "8E277069-37F3-4B5E-82E4-D33A7B3187CB",
+  "format": "SugarCube",
+  "format-version": "2.36.1",
+  "start": "Start",
+  "tag-colors": {
+    "Beginning": "purple",
+    "widgets": "red"
+  },
+  "zoom": 1
+}
+
+
+:: StoryTitle {"position":"1625,600"}
+Unnamed Life Simulator
+
+:: Start {"position":"1000,600"}
+Welcome to <b>Unnamed Life Simulator</b>! 
+
+This is a primarily weight gain focused text game that puts you the shoes of a (currently) female protaganist who is down on their luck and is given the chance to get back on their feet! Though it may be that this "chance" is far too good to be true.
+
+The entire story is presented through the perspective of this character in the second person. This means that any information that your character wouldn't know, you aren't going to know. For example, your weight as a number, the way your feet look when you're belly is too big to see past. Stuff like that. 
+
+Anyway, the game is currently in Pre-Alpha! As always that means that anything you see here is subject to change and the only content put in place is the barebone framework of the main gameplay loop. Lore, relationships, and most of the twists have not been implemented and this version of the game is purely for testing purposes. Have fun!
+
+[[Begin|gameStart]]
+
+[[Testing]]
+:: Testing {"position":"1150,600"}
+<<link "workout">><<strCheck 3 true>><</link>>
+<<nm "Sharyl" "Yuuuh, sa my duud">>
+
+<<move [[Ten Minutes|Testing]] 10>>
+<<move [[1 Hour|Testing]] 60>>
+
+<<work [[1 Hour of Easy Work|Testing]] 60 1>>
+<<work [[1 Hour of Medium Work|Testing]] 60 3>>
+<<work [[1 Hour of Hard Work|Testing]] 60 5>>
+<<work [[1 Hour of Extreme Work|Testing]] 60 9>>
+<<button [[toEat]]>><<set $foodItem = $testSlime >><</button>>
+
+<<link [[houseHub]]>><<set $firstTime ={
+work: true,
+supermarket: true,
+bathroom: true,
+bedroom: true,
+kitchen: true,
+townhub: true,
+park: true,
+}>><</link>>
+<<link "set aware">><<set $flags.isAware = 1>><</link>>
+:: toEat {"position":"1500,1200"}
+<<toEat>>
+<<return>>
+/*<<unset $foodItem>>*/
+
+:: transportInt
+
+<<nobr>>
+  <<strCheck 0 false>>
+    <<switch $transport.method>>
+    <<set _adjust = random(0,2)>>
+        <<case 0>>
+          <<if _rollAmount < 3>>/* do a 20 minute mile */
+            <<set _time = $transport.distance * 20>>
+            <<set _difficulty = 8>>
+          <<elseif _rollAmount < 6>>/* do a 18 minute mile */
+            <<set _time = $transport.distance * 18>>
+            <<set _difficulty = 8>>
+          <<elseif _rollAmount < 12>>/* do a 15 minute mile */
+            <<set _time = $transport.distance * 15>>
+            <<set _difficulty = 7>>
+          <<elseif _rollAMount > 12>>/* do a 12 minute mile */
+            <<set _time = $transport.distance * 12>>
+            <<set _difficulty = 6>>
+          <</if>>
+        <<case 1>>
+
+
+
+
+
+        <<case 2>>
+
+
+
+
+    <</switch>>
+<br><br>
+  <<include "transportEvent">>
+  <<switch $transport.location>>
+    <<case "Work">>Head to work <<work [[Work|workHub]] _time _difficulty>>
+    <<case "Supermarket">>Head to 
+    <<case "Park">>
+  <</switch>>
+<</nobr>>
+
+:: transportEvent
+<<nobr>>
+<<switch $transport.methord>>
+
+
+<</nobr>>
+/* create events */
+
+:: lookSelf [nobr]
+<<set _inInspect = true>><<if $hasPhone == true>><<else>>
+You take a moment to look down at yourself. <i>WIP</i> <br><br>
+
+<<switch $player.fatlevel>>
+<<case 2>>A semi skinny woman. 
+<</switch>>
+<</if>>
+<br><br><<return>>

@@ -1,0 +1,154 @@
+:: gameStart {"position":"1000,750"}
+<<nobr>>
+
+It's raining.<br><br>
+
+Rain falls like sheets as the yellow icandesent street lights hum in the cool night air. <br><br>
+
+<<linkreplace "Continue..." t8n>>You're walking alone. The ill equipped foldable umbrella you hold doesn't do enough, and you can feel the soles of your cheap hole dappled shoes getting soaked as rain coats your jeans. 
+The normally busy city streets are empty this late at night, even without the heavy rain. If you weren't so wet, you would almost feel solice in this lonely night.<br><br>
+
+<<linkreplace "Until..." t8n>>Thankfully now, you see your destination, a seemingly sturdly built stone building with boarded up windows. No light shown outside of the building, nothing to give you any idea of who lurked within 
+at these hours. Though it wasn't like it mattered, you took your quick steps up the concrete stairs outfront, and approached the door itself. A quick twist of the door knob confirms your
+ greatest fear, you're locked out.<br><br> 
+
+
+<<linkreplace "Knock?" t8n>>You do your best to give the lightest knocks possible, seeing as this is a quiet night. Though, in that annoying moment you stand waiting outside, the rain pouring harder and harder 
+  you realize that either nobody heard your knock, or they didn't care to answer.<br><br>
+
+<<linkreplace "Knock again?" t8n>> This time you do your best to really hit the door. You are far too wet and too cold to care about accidentally waking people up. You give one good knock, but 
+  as you move your hand to knock once more you find your hand fly through space as the door is ripped open quickly. <br><br>
+
+<<nm "Sharyl" "You betta have a good reason to be slapping ye knuckles against me door!">> A elderly woman's voice greets your ears. Her thick scottish accent and charming attitude were far from 
+unfamiliar to you. <<nm "Sharyl" "I swear, ye kid's these days have no concept of manners!">><br><br>
+
+<<linkreplace "Sharyl! It's me!">><<nm "player" "Sharyl! It's me!">> You hastily speak, and not a moment too soon as a large rolled up stick of news papers was in motion to thwap you in the head.<br><br>
+
+<<nm "Sharyl" "[[Who?|charSetup]]">>
+
+
+<</linkreplace>><</linkreplace>><</linkreplace>><</linkreplace>><</linkreplace>>
+
+<</nobr>>
+:: charSetup
+<<nobr>>
+<<textbox "$playervar.name" "Kara" autofocus>><br><br>
+
+
+
+<<linkreplace "Limitations... (Dev Note)">>Early on I decided that the amount of work required to add more customization features would be detrimental to the quality of the story, at least in the beginning. For now we will be sticking to the female story, and hopefully coming back to create the male one in the end. .<</linkreplace>>
+<br><br>
+[[Continue...|gameBegin1]]
+<</nobr>>
+:: gameBegin1 {"position":"1000,900"}
+<<nobr>>
+<<nm "Sharyl" "Oh! <<kara>>? What are you doing out so late!">> The rather intense older woman looks upon you harshly, and through her hushed tone she does little to hide her disapointment.<br><br> 
+
+<<linkreplace "Work..." t8n>>You tell Sharyl about your long day at work, these soul killing hours at Stamies have been eating away at you. Though not as much as the cold bite of the rain now nipped at your legs.<br><br>
+<<linkreplace "Continue..." t8n>><<nm "Sharyl" "Oh I'm sorry lass! I didn't mean for ya to stand out in the cold, get in, get in!">><br><br>
+<<linkreplace "And so it goes..."t8n >>Sharyl lets you inside as you tell her about your day. Once again apologizing for being far too loud with the door which she quickly brushes off. <<nm "Sharyl" "I sleep too deep for my own good is all! It's all but the ice under tha bridge here.">> <br><br>
+
+You thank her for her hospitality. <<nm "Sharyl" "That's what these places are for! You can stay here as long as you like...">> She elbows you in your bony gut. <<nm "Sharyl" "As long as you're doin' your damndest to get back on ye feet.">> <br><br>
+
+<<linkreplace "Continue..."t8n>> You give a hollow nod and a do your best to give a smile to her jokes. This day has gone on far too long to be willingly awake much longer. Though as you do your best to thank her and leave, she stops you. <<nm "Sharyl" "Actually, you got somethin' for yourself here.">> Sharyl walks over towards the nearby table, where stacks upon stacks of mail sits unopened yet neatly sorted. She ruffles through the papers, lightly cursing to her self as she nicks herself on one of the thicker documents. <<nm "Sharyl" "Ah! Here we go, take this upstairs will ye? Give it a read, I think you'll be interested in the offer.">><br><br>
+<<linkreplace "Thanks..."t8n>> Once again, you thank her for her hard work, doing your best to keep that hollow smile upon her face. Though you know all to well that she can see right through it. She gives that knowingly glare towards you before patting you hard upon the back. <<nm "Sharyl" "Now get yeself upstairs! You look like a ghost fucked a milk pail!">> You smile and shake your head.
+<br><br>
+
+[[Continue...|gameBegin2]]
+<</linkreplace>>
+<</linkreplace>>
+<</linkreplace>>
+<</linkreplace>>
+<</linkreplace>>
+<</nobr>>
+
+
+:: gameBegin2
+<<nobr>>
+What do you do? <br><br>
+
+<<linkreplace "Look around.<br><br>" t8n>>You glance around the space before you, and it's evident that this is an immensely old building. Far older than any of the buildings you've seen around the city. The roughly shaped stone brick walls on the outside give way to long since worn down wooden floors and walls upon the inside. Furniture shaped by time sits unused in so many corners, while the stairs that Sharyl directed you to have divots themselves, a physical reminder of the amount of people this place has helped in it's time. <br><br><</linkreplace>> 
+
+[[Head Upstairs|gameBegin3]]
+<</nobr>>
+
+:: gameBegin3 
+<<nobr>>
+You wince as the steps creak beneath your feet, the stillness of the air around you being immediately disturbed by the piercing cry of old wood. The upstairs itself holds many rooms, the building being far larger than you first expected when you first arrived so many months ago. It has been a long and ardious journey, all things considered. now you were here, finally being able to get one foot under another. Though time would tell if that was for the best or not, your fast food job only paid so much, and from what you have heard rent in this city is absolutely attrocious. <br><br>
+
+But for now, none of that mattered. Because now, as you threw the letter given to you upon your bedstand, and climbed into your bed, you basked in the warmth of your cheap mattress and thick wool blanket and immediately fell asleep. 
+
+<</nobr>>
+
+[[Sleep Cometh...| gameBegin4]]
+
+:: gameBegin4
+<<nobr>>
+As comfy as you were, the thin rays of piercing light did little to sustain your long sleep. Not that your ear shattering alarm clock wasn't going to finish the job soon enough. Reaching over you grab your clock and shut it off, though not before your hand runs across the letter you dropped there not but one restful night ago. <br><br>
+
+<<linkreplace "Take a look..." t8n>>The plain white envelope gave no hints on what went on within, though the large "Confidential Documents" label upon you feel a sharp spike of worry within your chest. The thickness of the envelope itself not helping matters. Expecting bills or some other bad news, you tear it open and pull out some of the many papers within. <br><br>
+<<linkreplace "A new outlook..." t8n>><i>"The Promise Intiative invites you to participate in it's new rehousing program..."</i> It wasn't bills, at least not yet. A hurried look through the paper described it all as a way to get a cheap house and a good paying job without much of hassle, all you had to do was sign some forms. Years of scraping by, years of pain and suffering solved by a handful of documents. <br><br>
+
+You weren't buying it.<br><br>
+
+You spin out of your bed, still in your work clothes from the night before, and rush over to your laptop nearby, a cheap plastic thing that did the job it needed slowly and nothing more, and searched up the name. The Promise Intiative, created by Dia Mementos, a company out of Washington. People spoke highly of their other programs, though this one didn't seem to appear anywhere. You skim through the papers once again, giving your best effort to try and see if anything looks fishy and honestly, it doesn't. <br><br>
+
+They don't seem to be asking for any information to use against you, they doesn't seem to be any specific loop holes or hidden text, but you aren't a lawyer you honestly couldn't tell. <br><br>
+
+But what was their to lose?<br><br>
+
+[[Time to fill out some paperwork...| gameIntro]]
+
+<</linkreplace>>
+<</linkreplace>>
+<</nobr>>
+
+:: gameIntro 
+<<nobr>>
+The next two weeks of your life are the most hectic weeks you have ever had in your life. Only a day after shipping the documents to the request location, you are reached out via email to meet with an agent at their office quite literally down the street from the halfway house. <br><br>
+
+You meet with them, they introduce themselves as <b><<nm "agent" "Agent Taren">></b>, and they then describe to you how everything will be working. <br><br>
+
+<<nm "agent" "You will be provided a house in the city of <b>Pingville</b>. You will own the house, though you will have to pay a monthy payment upon it due on the 15th of every month. You will be given two months of grace period before the payments begin. You will be given an office job at 'Van Papers', a workplace down the street from the house. It is not required that you go to the job, it is only required that you meet the payments of the house. Failure to do so will result in consquences, such as losing access to the house all together. Do try to keep the house clean and presentable, we wouldn't want you to ruin it. Does that make sense?">><br><br>
+
+You nod, doing your best to hide your both indescrible excitement and intense fear. If this was true, this was going to be the best turn around in your life. A chance to fix it all, something to do! Finally! <br><br>
+
+<<nm "agent" "Understood. Here are the keys, here is the address and here is the address for your new job. I would recommend keeping that job, it'll pay quite well if you keep at it. Anyway, I've got other stuff to do, I hope you last long in than the last guy...">> <br><br>
+
+Before you're able to exactly what the agent meant, he pushes you out the door and slams it behind you.
+
+<</nobr>>
+
+[[To the house...|houseIntro]]
+
+:: houseIntro 
+<<nobr>>
+A new city, a new home. A new start at a life you never had gotten before. What was going to happen? What are you going to do?<br><br>
+
+Those questions reverberate in your mind as the bumps rattle the bus you sit upon. Looking up, you see the sign just above the driver <i>Next Stop: Pingville</i>.<br><br>
+
+<<linkreplace "You arrive..." t8n>>It was a short walk from the bus stop, but now you are here. You look towards the small plain brown looking home that now, over the course of however long you stayed here, will be your home. <br><br>
+
+<<linkreplace "Walk up...?" t8n>>
+You walk up to the home, approaching the large wooden door seemingly freshly painted. You pull out the keys handed to you by the agent, and unlock the door. As the door swings open, the insides are revealed.<br><br>
+
+An open concept house, with a kitchen that sits off to the right, a living room further into the room itself, a door to your right leading to what looks like a large bedroom, and a door to your left revealing a bathroom. You walk through, getting a good look at everything, running your hand across the many pieces of furninture that sit within the building. All good quality, and all paid for by the program, now for you to own.<br><br>
+
+You know that you don't have work until Tomorrow at 9 am, so it would seem you have time to explore.<br><br>
+
+[[Let's begin...|houseHub]]
+<</linkreplace>><</linkreplace>>
+<<set $firstTime ={
+work: true,
+supermarket: true,
+bathroom: true,
+bedroom: true,
+kitchen: true,
+townhub: true,
+park: true,
+}>>
+<</nobr>>
+
+:: workIntro
+:: supermarketIntro
+:: parkIntro

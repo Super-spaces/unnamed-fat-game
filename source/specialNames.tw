@@ -1,0 +1,77 @@
+:: PassageHeader [nobr] {"position":"1725,600"}
+<<nobr>><<silently>>
+<<set $rand = random(1,10)>>
+/* if it's been to long since a workout, decrease strength */
+<<if $flags.sinceWorkout > 259200>><<set $player.str -= 5>><<set $flags.sinceWorkout 0>><</if>>
+/*NULL preventors */
+<<if $player.fullness < 0>><<set $player.fullness = 0>><</if>>
+<<if $player.hunger > 1000>><<set $player.hunger = 1000>><</if>>
+<<if $player.hunger < 0>><<set $player.hunger = 0>><</if>>
+/*Display Variables */
+<<set $display.weight = Number($player.weight/1000).toFixed(2)>>
+<<if $player.fullness == 0>>
+<<set $display.fullness = "Empty">>
+<<elseif $player.fullness >= $player.maxFullness*.80>>
+<<set $display.fullness = "Stuffed">>
+<<elseif $player.fullness >= $player.maxFullness/2>>
+<<set $display.fullness = "Full">>
+<<elseif $player.fullness <= $player.maxFullness/2>>
+<<set $display.fullness = "Content">>
+<<else>>
+<<set $display.fullness = "Null">>
+<</if>>
+<</silently>><hr><br><</nobr>>
+:: PassageFooter [nobr]
+<br><br><br><hr>
+<<if $flags.lastSlept > 86400>>
+    <<set $flags.needSleep = true>>
+    <<if $player.fatigue < 50>>
+    <<set $player.fatigue = 50>>
+    <</if>>
+    <<else>>
+    <<set $flags.needSleep = false>>
+<</if>>
+/*Inspect self icon, + prevention of soft lock with the temp variable. */
+<<if _inInspect == true>><<else>>[[Inspect Yourself|lookSelf]]<</if>>
+:: StoryCaption {"position":"1725,700"}
+<<if $gamestart == true>><<nobr>><<timeMachine>><<bmicalc>><<weightadj>>/*<<cleanadj>>*/
+''_hour:_minute _AMPM'' | $currentday.dowst<br>
+Day: ''$currentday.day''<hr>
+<<hovertip "Player Name <hr> This is your name, you may sometimes be referred to as such.">>Name: $playervar.name<</hovertip>><br>
+<<hovertip "Weight | <<nobr>><<if $display.scaleWeight == 0>>Unknown<<else>><<if $option.measurements == true>><<print $display.scaleWeight>>kgs <<print Number($display.scaleWeight*2.20462).toFixed(2)>>lbs<</if>><</if>><hr>This is your weight described as a word. To know exactly how much you weigh, you'll need to use a scale.<</nobr>>">>Weight: $weightadj <</hovertip>><br>
+Fullness: $player.fullness / $player.maxFullness <br>
+Money: $<<= $player.money>><br>
+<</nobr>><<nobr>>
+/*<<if $timedata.time <= 7200>> //The day has ended. It is now $currentday.dowst//<</if>>*/
+/*Hungry Bar */
+<<hovertip "<b>Hunger | $player.hunger / 1000</b><hr>This is your current hunger. Don't get too hungry...">>🍖:
+<<if $player.hunger >= 0 and $player.hunger < 100>>Ravenous
+    <<elseif $player.hunger >= 100 and $player.hunger < 200>>Starving
+    <<elseif $player.hunger >= 200 and $player.hunger < 300>>Hungry
+    <<elseif $player.hunger >= 300 and $player.hunger < 600>>Sated
+    <<elseif $player.hunger >= 600 and $player.hunger < 900>>Satisfied
+    <<elseif $player.hunger >= 900 and $player.hunger <= 1000>>Very Satisified
+<</if>><</hovertip>><br>
+<<hovertip "<b>Fatigue | $player.fatigue / 100</b><hr>This is your current fatigue. Don't let it get too low or you'll have to rest!">>😴:
+<<if $player.fatigue >= 0 and $player.fatigue < 20>>Energetic
+    <<elseif $player.fatigue >= 20 and $player.fatigue < 30>>Awake
+    <<elseif $player.fatigue >= 30 and $player.fatigue < 60>>Content
+    <<elseif $player.fatigue >= 60 and $player.fatigue < 80>>Tired
+    <<elseif $player.fatigue >= 80 and $player.fatigue < 100>>Exhausted
+<</if>><</hovertip>>
+/*Lust Bar */
+<<if $player.lust > 10>><<hovertip "<b>Lust</b><hr>This is your current lust. If you let this get too far, you might find yourself harder to please.">>❤️‍🔥:<</hovertip>><</if>>
+<<if $player.lust >= 0 and $player.lust < 10>>
+    <<elseif $player.lust >= 10 and $player.lust < 30>>Horny
+    <<elseif $player.lust >= 30 and $player.lust < 70>>Hornier
+    <<elseif $player.lust >= 70 and $player.lust < 90>>Drenched
+    <<elseif $player.lust >= 90 and $player.lust < 100>>Necessary
+<</if>>
+<hr>
+/*<<if $flags.sweat == true>><div class="sweat"><<hovertip "<b>Sweating</b><hr>You are sweating!">>💦<</hovertip>></div><</if>>*/
+<<if $player.hunger < 300>><div class="hungry"><<hovertip "<b>Hungry</b><hr>You are Hungry!">>🍴<</hovertip>></div><</if>>
+/*<<if $player.lust > 70>><div class="horny"><<hovertip "<b>Horny</b><hr>You are horny!">>💗<</hovertip>></div><</if>>
+<<if $player.fatigue > 60>><div class="sleepy"><<hovertip "<b>Tired</b><hr>You are tired!">>💤<</hovertip>></div><</if>>*/
+<</nobr>>
+<</if>>
+

@@ -1,0 +1,49 @@
+:: foodSet
+
+/* Need to plan on creating the required food items as they are necessary and destroying them when we are done. Keeping a bunch of different food items in memory is going to cause problems. */
+
+/* but for now, we test food */
+<<set $testSlime ={
+name: "testSlime",
+fullness: 100,
+gainRate: 1000,
+digestRate: 1, 
+toEat: "You eat the test slime, it's slimy, and testy. It goes down surprisingly well, all things considered. You feel a little bit more full.",
+hunger: 500,
+}>>
+<<set $smallMeal ={
+name: "smallMeal",
+fullness: 30,
+gainRate: 1,
+digestRate: 1,
+toEat: "You sit down at your table and scruff down a small meal. It's delicious!",
+hunger: 300,
+glutChance: 0,
+}>>
+<<set $normalMeal ={
+name: "normalMeal",
+fullness: 60,
+gainRate: 1,
+digestRate: 1,
+toEat: "You sit down at your table and scruff down a small meal. It's delicious!",
+hunger: 300,
+glutChance: 0,
+}>>
+<<set $largeMeal ={
+name: "smallMeal",
+fullness: 120,
+gainRate: 1,
+digestRate: 1,
+toEat: "You sit down at your table and scruff down a small meal. It's delicious!",
+hunger: 300,
+glutChance: 3,
+}>>
+<<set $hugeMeal ={
+name: "smallMeal",
+fullness: 240,
+gainRate: 1,
+digestRate: 1,
+toEat: "You sit down at your table and scruff down a small meal. It's delicious!",
+hunger: 300,
+glutChance: 5,
+}>>

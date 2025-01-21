@@ -1,0 +1,23 @@
+sugarcube-2:
+  macros:
+    hovertip:
+      name: hovertip
+      container: true
+    work:
+      name: work
+    strCheck:
+      name: strCheck
+    bmicalc:
+      name: bmicalc
+    move:
+      name: move
+    timeMachine:
+      name: timeMachine
+    nm:
+      name: nm
+    transport:
+      name: transport
+    toEat:
+      name: toEat
+    weightadj:
+      name: weightadj

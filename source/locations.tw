@@ -1,0 +1,249 @@
+:: houseHub {"position":"1000,1050"}
+<<nobr>><<set $gamestart = true>>
+You stand in the middle of your house... <br><br>
+
+A kitchen that sits off to the right, a living room further into the room itself, a door to your right leading to your bedroom, and a door to your left revealing a bathroom. <br><br>
+
+
+<<switch $flags.houseClean>>
+<<case 0>>Currently your house is spotless, with barely even a speck of dust upon the ground.
+<</switch>><br><br>
+
+<<move [[Bathroom]] 1>><br>
+<<move [[Bedroom]] 1>><br>
+<<move [[Kitchen]] 1>><br><br>
+<<move [[Leave the House|preTownHub]] 3>><br>
+
+
+[[Testing]]<br>
+<</nobr>>
+:: Bathroom {"position":"800,1050"}
+<<nobr>>
+<<if $firstTime.bathroom == true>>
+    
+You enter your bathroom for the first time, it's not that large of a room, though plenty spacious for your skinny self. You see decently sized walk in shower, along with a sink and a toilet.<br><br>
+<<unset $firstTime.bathroom>>
+<<else>>
+You enter your bathroom, you see decently sized walk in shower, along with a sink and a toilet.<br><br>
+    
+    
+<</if>>
+
+<<if $player.fatlevel < 5>> 
+<<move [[Step onto Scale|Scale]] 5>><br>
+<<move [[Step into Shower|Shower]] 5>><br><br>
+<<elseif $player.fatlevel <= 9>>
+<<move [[Waddle onto Scale|Scale]] 5>><br>
+<<move [[Waddle into Shower|Shower]] 5>><br><br>
+<<else>>
+<<move [[Step onto Scale|Scale]] 5>><br>
+You do not fit in the shower!<br><br>
+<</if>>
+<<move [[Back|houseHub]] 1>>
+
+
+<</nobr>>
+:: Shower
+<<nobr>>
+<<switch $player.fatlevel>>
+    <<case 1>>You're a skinny bitch! <br><br>
+    <<case 2>>You're less of a skinny bitch and the water does water things.<br><br>
+    <<case 3>>You're starting to get rolls but you still can reach your back.<br><br>
+    <<case 4>>it's starting to get harder to reach certain places. <br><br>
+    <<case 5>>it's definitely getting harder to reach places. <br><br>
+    <<case 6>>you're having to make sure to rinse and dry all of your rolls. The shower door scrapes your sides as you walk in, you barely fit without touching the sides.<br><br>
+    <<case 7>>You are having to start to think about how you enter the shower, and the water does not feel like it's getting all the parts of your body. <br><br>
+    <<case 8>>It's getting exhausting just standing in the shower. You barely fit through the door, and there is a part of your body touching the sides at all time. <br><br>
+    <<case 9>>You're sweating more liquid than the water hitting your body. You are almost certain you've missed a bunch of spots as a part of you touches every side of the shower.<br><br>
+
+<</switch>>
+<<move [[Back|Bathroom]] 2>>
+
+<</nobr>>
+:: Scale {"position":"600,1050"}
+You currently weight $display.weight kgs
+
+[[Bathroom]]
+<<set $display.scaleWeight = $display.weight>>
+
+:: Bedroom {"position":"900,1200"}
+You enter your bedroom. It's rather sparse at the moment, a strange painting of a flower sits off in the corner next to the shaded window in the center of the wall. You're bed sits in the center of the room, as you left it in the morning. To your right there is your mirror. 
+
+
+[[Sleep?|Bed]]
+[[Mirror]] 
+
+<<move [[Back|houseHub]] 1>>
+
+:: Bed
+<<nobr>>
+    /*Finish here! */
+    <<switch $player.fatlevel>>
+    <<case 1>>
+    <<case 2>>You crawl into bed, pulling the large rather fluffy blanket over your shoulder and snuggle up against the pillow. Closing your eyes for a quick bit of rest. <br><br>
+    <<case 3>>
+    <</switch>>
+    How long would you like to sleep?<br><<textbox "$sleepTime" 9 "sleepCheck">>
+<</nobr>>
+:: sleepCheck
+<<if $sleepTime < 0>><<set $sleepTime = 0>><</if>>
+<<if $sleepTime > 12>><<set $sleepTime = 12>><</if>>
+<<set $sleptHours = 0>>
+<<for _i = 0; _i lt $sleepTime; _i++>>
+    <<if $player.fatigue < 8>><<set $player.fatigue = 0>><<break>><</if>>
+    <<if $player.fatigue > 0>>
+    <<set $player.fatigue -= 8>>
+    <<set $currentday.time += 60*60>>
+    <<set _hourToMin = 60>>
+    <<if $player.fullness > 0>>
+        <<set $player.fullness = $player.fullness-(_hourToMin*.5)*(.5*$player.digestRate)>>
+        <<set $player.weight = $player.weight+($player.gainRate*(_hourToMin*0.28))>>
+    <</if>>
+    <<set $player.weight -= (_hourToMin*.01)>>
+    <<if $player.hunger > 0>>
+        <<set $player.hunger -= (_hourToMin*.5)+($player.gluttony*.1)>>
+    <</if>>
+            /*stretching */
+            <<if _minute % 10 == 6 || _minute % 10 == 3 || _minute % 10 == 9>>
+                <<if $player.fullness >= $player.fullness*.75 && $rand <= 3>>
+                    <<if $rand <= 1>><<set $player.gluttony += 1>><</if>>
+                    <<set $player.maxFullness += 5>>
+                <</if>>
+            <</if>>
+    <<else>>
+    <<break>>
+    <</if>>
+    <<set $sleptHours++>>
+<</for>>
+<<set $flags.lastSlept = 0>>
+<<unset $sleepTime>>
+<<goto "postSleep">>
+:: postSleep
+
+You successfully slept $sleptHours!
+
+[[Back|Bedroom]]
+
+:: Mirror {"position":"700,1300"}
+<<nobr>>
+<<switch $player.fatlevel>>
+    <<case 1>>You look upon yourself in the mirror, the clothing you wear draping across your form like the breezing curtains upon a window. Your thin form is very gaunt, with a concave stomach and the beginnings of sucken cheeks. Your breasts are mostly flat, and your butt shares the same fate. <br><br> If someone were to look upon you in public they would most likely assume you were having trouble getting food. <<if $flags.isAware == 1>><br><br> <i>You feel an almost nonstop sense of dread...</i> <</if>>/* <100 lbs */
+    <<case 2>>You look upon yourself in the mirror, the clothing you wear fitting your well defined form well. Your face looks healthy and thin, while your stomach has a little bit of a dome and your breasts are no bigger than a handful. You are peak health, at least when it comes to fat. <br><br> If someone were to look upon you in public they most likely wouldn't even give you a second thought.<<if $flags.isAware>><br><br><i>You feel an overwhelming urge to keep grow...</i><</if>>/* <145 lbs */
+    <<case 3>>You look upon yourself in the mirror, the clothing you wear now far more form fitting then before, to the point of snugness. Your face has grown plump and you can feel the beginnings of the lightest bump of a second chin upon your neck. Your now large jiggling stomach has developed a large fold just above your pubic area where gravity has pulled it's weight down. Your breasts have grown to be larger, around softball size and easily sway when you walk. You're beginning to feel the weight of your body.<br><br>If someone were to look upon you in public they would most likely assume you had let go of your recent diet.<<if $flags.isAware>><br><br><i>You feel an overwhelming urge to keep grow...</i><</if>>/* <200 lbs */
+    <<case 4>>
+    <<case 5>>
+    <<case 6>>
+    <<case 7>>
+    <<case 8>>
+    <<case 9>>
+    <<case 10>>
+    <<case 11>>
+    <<case 12>>
+    <<case 13>>
+<</switch>>
+
+<br><br><<move [[Back|Bedroom]] 1>>
+<</nobr>>
+:: Kitchen {"position":"1100,1200"}
+<<nobr>>
+You walk into the kitchen, it's of vaguely modern design with some type of stone countertop and plenty of filled cubbards. You feel as if you could make food here.<br><br> 
+
+<<if $food.amount < 500>>You do not have any food to eat!<br><br><<else>>
+    
+    <<if $player.gluttony <= 3 && $food.amount >= 500>>
+        <<if $player.maxFullness - $player.fullness > 30>>
+            <<link [[Eat a Small Meal|toEat]]>>
+                <<set $foodItem = $smallMeal>><<set $food.amount -= 500>>
+            <</link>><br>
+            <<else>>You are too full to eat a Small Meal!<br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony <= 5 && $food.amount >= 1000>>
+        <<if $player.maxFullness - $player.fullness > 60>>
+        <<link [[Eat a Normal Meal|toEat]]>>
+            <<set $foodItem = $normalMeal>>
+            <<set $food.amount -= 1000>>
+        <</link>><br>
+            <<else>>You are too full to eat a Normal Meal!<br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=3 && $food.amount >= 2000>>
+        <<if $player.maxFullness - $player.fullness > 120>>
+        <<link [[Eat a Large Meal|toEat]]>>
+            <<set $foodItem = $largeMeal>>
+            <<set $food.amount -= 2000>>
+        <</link>><br>
+            <<else>>You are too full to eat a Large meal!
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=5 && $food.amount >= 3000>>
+        <<if $player.maxFullness - $player.fullness > 240>>
+        <<link [[Eat a Huge Meal|toEat]]>>
+            <<set $foodItem = $hugeMeal>>
+            <<set $food.amount -= 3000>>
+        <</link>><br>
+            <<else>>You are too full to eat a Huge meal!
+        <</if>>
+    <</if>>
+<br>
+<</if>>
+
+[[Go to the Fridge|fridge]]<br>
+<<move [[Back|houseHub]] 1>>
+
+<</nobr>>
+:: fridge
+
+<<= $food.amount>>
+
+DEBUG
+<<button "set +100">><<set $food.amount += 100>><<goto [[fridge]]>><</button>>
+
+[[back|Kitchen]]
+
+:: preTownHub
+
+As you go to leave your house, you consider for a moment how you will get to your destination...
+
+<<nobr>>
+    <<link [[Walk|townHub]]>><<set $transport.method = 0>><</link>> <<if $player.bmi > 45>><i>Do you really have to walk?</i><</if>><br>
+    <<if $flags.transport == 1>><<if $player.bmi < 67>><<link [[Bike|townHub]]>><<set $transport.method = 1>><</link>><<else>><i>You are too fat to ride a bike!</i><br><</if>><</if>>
+    <<if $flags.transport == 2>><<if $player.bmi < 121>><<link [[Car|townHub]]>><<set $transport.method = 2>><</link>><<else>><i>You don't fit in your car!</i><br><</if>><</if>>
+    <<if $flags.friendDrive == true>><<link [[Call somebody?|townHub]]>><<set $transport.method = 3>><</link>><</if>>
+    <<if $flags.hasPhone == true>><<link [[Uber|townHub]]>><<set $transport.method = 4>><</link>><<else>><i>You need a phone to call an Uber!</i><</if>><br>
+<</nobr>>
+[[Cancel|houseHub]]
+:: toTownHub 
+
+:: townHub {"position":"1000,1400"}
+<<switch $transport.method>>
+    <<case 0>>You walk up to the major intersection outside of your house, and look left and right. Where would you like to go?
+    <<case 1>>You bike up to the major intersection outside of your house, and look left and right. Where would you like to go?
+    <<case 2>>You drive up to the major intersection outside of your house, and look left and right. Where would you like to go?
+    <<case 3>>Your friend looks back towards you and asks "Where would you like to go?"
+    <<case 4>>
+<</switch>>
+
+<<transport "Supermarket" 5>>
+<<transport "Work" 1>>
+<<transport "Park" .5>>
+
+
+<<move [[Go Home|houseHub]] 10>>
+
+:: workHub 
+<<nobr>>
+<<if $currentday.dayofweek == 0 || $currentday.dayofweek == 6>>You come into work on a weekend...<br><br>[[Leave|preTownHub]]<<elseif $timedata.hour < 5 || $timedata.hour >= 17>>You arrive at work afterhours...<br><br>[[Leave|preTownHub]]<<else>>
+You arrive into work 
+<<switch $flags.lateWork>>
+    <<case 0>><i>early</i>
+    <<case 1>><i>on time</i>
+    <<case 2>><i>late</i>
+<</switch>>
+
+<br><br><<move [[Begin Work|workJob]] 10>>
+<</if>>
+<</nobr>>
+:: workJob
+
+/* this is where i left off */

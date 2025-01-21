@@ -1,0 +1,249 @@
+:: widget [widget nobr] {"position":"1825,700"}
+<<widget "timeMachine">><<silently>>    
+    <<set $currentday.hour to Math.floor(($currentday.time/60)/60)>>
+    <<set _AMPM to "AM">>
+    <<set $timedata = $currentday>>
+    <<set $timedata.minute = $timedata.time/60>>
+    <<if $timedata.hour >= 1>>
+        <<set _hour to $timedata.hour>>
+    <<else>>
+        <<set _hour to 12>>
+    <</if>>
+    <<for $currentday.minute >= 60>>
+        <<set $currentday.minute = $currentday.minute - 60>>
+    <</for>>
+    <<if $currentday.dayofweek == 0>>
+        <<set $currentday.dowst = "Sunday">>
+    <<elseif $currentday.dayofweek == 1>>
+        <<set $currentday.dowst = "Monday">>
+    <<elseif $currentday.dayofweek == 2>>
+        <<set $currentday.dowst = "Tuesday">>
+    <<elseif $currentday.dayofweek == 3>>
+        <<set $currentday.dowst = "Wendesday">>
+    <<elseif $currentday.dayofweek == 4>>
+        <<set $currentday.dowst = "Thursday">>
+    <<elseif $currentday.dayofweek == 5>>
+        <<set $currentday.dowst = "Friday">>
+    <<elseif $currentday.dayofweek == 6>>
+        <<set $currentday.dowst = "Saturday">>
+    <</if>>
+    <<if $timedata.dayofweek >= 7>>  
+        <<set $timedata.dayofweek to 0>>
+    <</if>>
+    <<if _hour > 12>>
+        <<set _hour = $timedata.hour - 12>>
+        <<set _AMPM to "PM">>
+    <</if>>
+    <<if $timedata.minute < 10>>
+        <<set _minute = "0" + $timedata.minute>>
+    <<else>>
+        <<set _minute to $timedata.minute>>
+    <</if>>
+    <<if $timedata.time >= 86400>>
+    /*<<dailyflagreset>> if need renable it's right here <----*/
+        <<set $currentday.time to 0>>
+        <<set ++$currentday.dayofweek>>
+        <<set ++$currentday.day>>
+    <</if>>
+    <</silently>><</widget>>
+
+<<widget "createFood">><<set _food = _args[0]>><</widget>>
+/*Food Consumption */
+<<widget 'toEat'>>
+<<nobr>>
+    <<set _foodItemObject = $foodItem>>
+    <<if $player.fullness + _foodItemObject.fullness > $player.maxFullness>>
+    You are too full to eat this!<br><br>
+    <<else>>
+    <<set $player.gainRate to _foodItemObject.gainRate>>
+    <<set $player.fullness += _foodItemObject.fullness>>
+    <<set $player.hunger += _foodItemObject.hunger>>
+    <<if _foodItemObject.glutChance >= $rand>><<set $player.glutton += 1>><</if>>
+    /*<<set $peffects.indigestion to _fooditemObject.indigestion>>*/
+    /*<<set $foodheader to _foodItemObject.effect>> */
+    _foodItemObject.toEat <br><br>
+    <</if>>
+<</nobr>>
+<</widget>>
+/*move command <<move [[name of place|place]] time>>*/
+<<widget 'move'>>\
+    <<nobr>>
+	    @@.link;
+        <<link $args[0]>><<set $currentday.time += $args[1]*60>>
+            /*Last slept */<<set $flags.lastSlept += $args[1]*60>>
+            /*last workout */<<set $flags.sinceWorkout += $args[1]*60>>
+            $args[2]
+            /*weight gain and fullness decrease */
+            <<if $player.fullness > 0>>
+                <<set $player.fullness -= $args[1] * .5 * (.5 * $player.digestRate)>>
+                <<set $player.weight += ($player.gainRate * ($args[1] * 0.28))>>
+            <</if>>
+            /*normal weight decrease */
+            <<if $player.fullness <= 0>><<set $player.weight -= ($args[1]*.01)>><</if>>
+            /*hunger Decreases */
+            <<if $player.hunger > 0>><<set $player.hunger -= $args[1]*.5+($player.gluttony*.1)>><</if>>
+            /*Fatigue Increases */
+            <<set $player.fatigue += $args[1]*0.07+(0.07 * ($player.weight/500000))>> /*Number(($player.fatigue+($player.weight/200000*($args[1]*.08))*(($player.fullness/$player.maxFullness)+1)).toFixed(2)) */
+            /*stretching */
+            <<if _minute % 10 == 6 || _minute % 10 == 3 || _minute % 10 == 9>>
+                <<if $player.fullness >= $player.fullness*.75 && $rand <= 3>>
+                    <<if $rand <= 1>><<set $player.gluttony += 1>><</if>>
+                    <<set $player.maxFullness += 5>>
+                <</if>>
+            <</if>>
+            /* <<if $flags.fatlust == true>>
+            <<set $player.lust = Number(($player.lust+($player.weight*.01*($args[1]))).toFixed(2))>>
+            <<else>>
+            <<set $player.lust = $player.lust+.001*($args[1])>>
+            <</if>>*/
+        <</link>>
+         @@
+    <</nobr>>
+<</widget>>\
+/*work command <<work ([[name of place|place]]) time work_amount (1-10 adds 50% per point)>> */
+<<widget 'work'>>\
+    <<nobr>>
+	    @@.link;
+        <<link $args[0]>>
+            /* time increment */ <<set $currentday.time += $args[1]*60>>
+            /* last slept */<<set $flags.lastSelpt += $args[1]*60>>
+            /* last workout */<<set $flags.sinceWorkout += $args[1]*60>>
+            <<if $player.fullness > 0>>
+                <<set $player.fullness -= $args[1] * (.5 * (.5 * $player.digestRate)) * (1 + (3 * ($args[2] / 10)))>>
+                <<set $player.weight += ($player.gainRate * ($args[1] * 0.28))>>
+            <</if>>
+            /*normal weight decrease */
+            <<if $player.fullness <= 0>><<set $player.weight -= ($args[1]*.01) * (5 * ($args[2] / 10))>><</if>>
+            /* hunger decreases */
+            <<if $player.hunger > 0>><<set $player.hunger -= $args[1] * (.5 + ($player.gluttony * .1)) * (1 + (5 * ($args[2] / 10)))>><</if>>
+            /* fatigue decreases */
+            <<set $player.fatigue += $args[1] * (0.07 + (0.07 * ($player.weight / 500000))) * (1 + (5 * ($args[2] / 10)))>>
+            /*streching */
+            <<if _minute % 10 == 6 || _minute % 10 == 3 || _minute % 10 == 9>>
+                <<if $player.fullness >= $player.fullness*.75 && $rand <= 3>>
+                    <<if $rand <= 1>><<set $player.gluttony += 1>><</if>>
+                    <<set $player.maxFullness += 5>>
+                <</if>>
+            <</if>>
+        <</link>>
+         @@
+    <</nobr>>
+<</widget>>\
+/*fat calc */
+<<widget 'bmicalc'>>\
+		<<silently>>
+        	<<set $player.bmi = Math.round(($player.weight/1000)/(($player.height/100)^2))>>
+            <<if $player.bmi > 0 and $player.bmi < 18.5>><<set $player.fatlevel to 1>>/* <100 lbs */
+            <<elseif $player.bmi > 18.5 and $player.bmi < 25>><<set $player.fatlevel to 2>>/* <165 lbs */
+            <<elseif $player.bmi > 25.0 and $player.bmi < 35>><<set $player.fatlevel to 3>>/* <230 lbs */
+            <<elseif $player.bmi > 35 and $player.bmi < 45>><<set $player.fatlevel to 4>>/* <300 lbs */
+            <<elseif $player.bmi > 45 and $player.bmi < 55>><<set $player.fatlevel to 5>>/* <365 lbs */
+            <<elseif $player.bmi > 55 and $player.bmi < 67>><<set $player.fatlevel to 6>>/* <440 lbs */
+            <<elseif $player.bmi >67 and $player.bmi < 77>><<set $player.fatlevel to 7>>/* <510lbs */
+            <<elseif $player.bmi >77 and $player.bmi < 91>><<set $player.fatlevel to 8>>/* <600lbs */
+            <<elseif $player.bmi >91 and $player.bmi < 106>><<set $player.fatlevel to 9>>/* <700lbs */
+            <<elseif $player.bmi >106 and $player.bmi < 121>><<set $player.fatlevel to 10>>/* <800lbs */
+            <<elseif $player.bmi >121 and $player.bmi < 136>><<set $player.fatlevel to 11>>/* <900lbs */
+            <<elseif $player.bmi >136 and $player.bmi < 152>><<set $player.fatlevel to 12>>/* <1000lbs */
+            <<elseif $player.bmi >152 and $player.bmi < 228>><<set $player.fatlevel to 13>>/* <1500lbs */
+            <<elseif $player.bmi >228>><<set $player.fatlevel to 14>><</if>>/* >1500lbs */
+        <</silently>>
+ <</widget>>
+ /*adjectives for fat calc */
+<<widget 'weightadj'>>
+    <<silently>>
+		<<set $weightadj = "Null">>
+		<<switch $player.fatlevel>>
+            <<case 1 $weightadj = "Underweight">>
+            <<case 2>><<set $weightadj = "Skinny">>
+            <<case 3>><<set $weightadj = "Curvy">>
+            <<case 4>><<set $weightadj = "Chubby">>
+            <<case 5>><<set $weightadj = "Pudgy">>
+            <<case 6>><<set $weightadj = "Portly">>
+            <<case 7>><<set $weightadj = "Fat">>
+            <<case 8>><<set $weightadj = "Lardy">>
+            <<case 9>><<set $weightadj = "Very Fat">>
+            <<case 10>><<set $weightadj = "Corpulent">>
+            <<case 11>><<set $weightadj = "Porcine">>
+            <<case 12>><<set $weightadj = "Barely Mobile">>
+            <<case 13>><<set $weightadj = "Bovine">>
+            <<case 14>><<set $weightadj = "Blob of Fat">>
+        <</switch>>
+    <</silently>>
+<</widget>>
+<<widget 'cleanadj'>>
+    <<silently>>
+        <<set $cleanadj = "Null">>
+        <<switch $home.clean>>
+            <<case 1 $cleanadj = "Overwhelmingly Bad">>
+            <<case 2>><<set $cleanadj = "Disgusting">>
+            <<case 3>><<set $cleanadj = "Filthy">>
+            <<case 4>><<set $cleanadj = "Messy">>
+            <<case 5>><<set $cleanadj = "Dirty">>
+            <<case 6>><<set $cleanadj = "Fair">>
+            <<case 7>><<set $cleanadj = "Decent">>
+            <<case 8>><<set $cleanadj = "Clean">>
+            <<case 9>><<set $cleanadj = "Pristine">>
+            <<case 10>><<set $cleanadj = "Immaculate">>
+        <</switch>>
+    <</silently>>
+<</widget>>
+/*attempted dialogue widget. */
+<<nobr>><<widget 'nm'>><<nobr>><<= '<span class="' + $args[0] + '">' + '"' + $args[1] + '"' + '</span>'>><</nobr>><</widget>><</nobr>>
+<<widget 'kara'>><<= "$playervar.name">><</widget>>
+/*transport widget test */
+<<widget 'transport'>>
+    <<nobr>>
+    <<link [[$args[0]|transportInt]]>>
+        <<set $transport.distance = $args[1]>>
+        <<set $transport.location = $args[0]>>
+    <</link>>
+    <</nobr>>
+<</widget>>
+/* Transport Calculations
+Transport System
+
+distance * rate (5280 per 15)
+
+set _speed to distance * time
+
+
+*/
+<<widget 'transportCal'>>
+    
+<</widget>>
+/* Strength Check <<strCheck [DC] [isWorkout?]>> */
+<<widget "strCheck">>
+<<nobr>>
+<<if $player.str <= 10>><<set _score = 0>>
+<<elseif $player.str <= 20>><<set _score = 1>>
+<<elseif $player.str <= 30>><<set _score = 2>>
+<<elseif $player.str <= 40>><<set _score = 3>>
+<<elseif $player.str <= 50>><<set _score = 4>>
+<<elseif $player.str <= 60>><<set _score = 5>>
+<<elseif $player.str <= 70>><<set _score = 6>>
+<<elseif $player.str <= 80>><<set _score = 7>>
+<<elseif $player.str <= 90>><<set _score = 8>>
+<<elseif $player.str <= 100>><<set _score = 9>>
+<<else>><<set _score = 10>><</if>>
+<<switch $player.fatlevel>>
+<<case 4>><<set _score -= 1>>
+<<case 5>><<set _score -= 1>>
+<<case 6>><<set _score -= 2>>
+<<case 7>><<set _score -= 2>>
+<<case 8>><<set _score -= 3>>
+<<case 9>><<set _score -= 4>>
+<<case 10>><<set _score -= 5>>
+<<case 11>><<set _score -= 6>>
+<<case 12>><<set _score -= 7>>
+<</switch>>
+<<set _roll = random(1, 12)>>
+<<set _rollAmount = _roll + _score>>
+<<if _rollAmount >= $args[0]>><<set $strResult = true>><<else>><<set $strResult = false>><</if>>
+<<if $args[1] == true>>
+    <<set $flags.sinceWorkout = 0>>
+    <<set _rollGoal = _score + 10>>
+    <<if _rollAmount >= _rollGoal>><<set $player.str += 5>><</if>>
+<</if>>
+<</nobr>>
+<</widget>>

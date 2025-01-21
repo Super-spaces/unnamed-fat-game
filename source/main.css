@@ -1,0 +1,143 @@
+/* Characters */ 
+.Sharyl {
+	color:brown
+
+}
+.player {
+	color:aqua
+
+}
+.agent {
+	color:grey
+}
+
+/* Horizontal Health Bar - Start */
+.hzbarbkg {  /* default class for all horizontal bar backgrounds */
+	position: relative;
+	height: 15px;
+	width: 100%;
+	background-color: #111;
+	background-image: linear-gradient(to right, rgba(68, 68, 68, 0.5), rgba(34, 34, 34, 0.5) 5px), linear-gradient(to bottom, rgba(68, 68, 68, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to left, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px);
+	border-radius: 10px;
+	z-index: 10;
+	visibility: visible;
+}
+.hzbar {  /* default class for all horizontal bars */
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 15px;
+	background-color: transparent;
+	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px);
+	border-radius: 10px;
+	z-index: 20;
+	transition: width ease 1s, background-color ease 1s;
+}
+#horizontalhealthbar {  /* colors for specific fixed-color horizontal bars */
+	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), radial-gradient( circle at bottom right, #0c0, #0c0 60% );
+}
+/* Horizontal Health Bar - End */
+
+/* hovertip v2.0 - Start */
+.hoverTip {
+	display: inline-block;
+	top: 4px;
+	border-width: 0px;
+    border-bottom: 0px dotted white;  /* If you want dots under the hoverable text */
+}
+.hoverTipTxt {
+	position: relative;
+	vertical-align: text-bottom;
+	line-height: initial;
+}
+.hoverTipTxt .hoverBox {
+	position: absolute;
+	visibility: hidden;
+}
+.hoverTipTxt:hover .hoverBox, .hoverTipTxt:focus .hoverBox {
+  		visibility: visible;
+}
+.hoverBox {
+	padding: 10px 10px;
+	width: intrinsic;  /* Safari/WebKit uses a non-standard name */
+	width: -webkit-max-content;  /* Chrome */
+	width: -moz-max-content;  /* Firefox/Gecko */
+	width: max-content;
+	max-width: 330px;
+	line-height: initial;
+	text-align: left;
+	color: white;
+	background-color: #1e1e1ff0;
+	border: #7f7f7f solid 2px;
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+	        border-radius: 6px;
+	-webkit-box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.75);
+	   -moz-box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.75);
+	        box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.75);
+	z-index: 49;
+}
+.hoverTail::after {
+	content: "";
+	position: absolute;
+	top: 100%;  /* At the bottom of the tooltip */
+	left: 50%;
+	margin-left: -5px;
+	border-width: 8px;
+	border-style: solid;
+	border-color: #7f7f7f transparent transparent transparent;
+	z-index: 49;
+}
+.hoverBox a {
+	-webkit-transition-duration: unset;
+	   -moz-transition-duration: unset;
+	     -o-transition-duration: unset;
+	        transition-duration: unset;
+}
+
+#ui-bar .hoverBox {
+	max-width: 200px;
+}
+/* hovertip v2.0 - End */
+/* effects */
+.sweat { 
+
+    border: 5pt outset rgb(118, 197, 240);
+    border-radius: 10pt;
+    width: 20pt;
+    display: inline-block; 
+    vertical-align: top;
+    background-color: rgb(30, 76, 100);
+    text-align: center;
+  }
+  .hungry { 
+
+    border: 5pt outset rgb(141, 69, 6);
+    border-radius: 10pt;
+    width: 20pt;
+    display: inline-block; 
+    vertical-align: top;
+    background-color: rgb(67, 33, 4);
+    text-align: center;
+  }
+  .sleepy { 
+
+    border: 5pt outset rgb(65, 6, 141);
+    border-radius: 10pt;
+    width: 20pt;
+    display: inline-block; 
+    vertical-align: top;
+    background-color: rgb(98, 44, 168);
+    text-align: center;
+  }
+  .horny { 
+
+    border: 5pt outset rgb(141, 6, 114);
+    border-radius: 10pt;
+    width: 20pt;
+    display: inline-block; 
+    vertical-align: top;
+    background-color: rgb(168, 44, 145);
+    text-align: center;
+  }
+  

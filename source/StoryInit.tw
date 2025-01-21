@@ -1,0 +1,64 @@
+:: StoryInit {"position":"1825,600"}
+<<include [[foodSet]]>>
+/*imperal vs metric */
+<<set $option ={
+measurements: true, /*imperial false, metric true */
+}>>
+/*time options */
+<<set $food ={
+quality: 0,
+amount: 0, /*small = 500, normal = 1000, large = 2000, huge = 3000*/
+}>>
+<<set $currentday ={
+time: 32400, 
+hour : 0, 
+minute : 0,
+weather: 0,
+dayofweek: 6,
+temp: 17,
+dowst: "",
+day: 0,
+}>>
+<<set $currentday.minute = $currentday.time/60>>
+<<for $currentday.minute >= 60>><<set $currentday.minute = $currentday.minute - 60>><</for>>
+/*player variables */
+<<set $player ={
+fullness: 0, /* Range 1-2000; 500 is normal human fullness 'stretching' tbd */
+maxFullness: 100,
+weight: 61300,  /* in grams */
+gainRate: 0, /* possible variable to be used */
+str: 0, /* 1-100 increases by 5 on successful workout attempts, decreases by 5 after 3 days of no activity. */
+digestRate: 1,
+height: 175,
+hunger: 400,
+fatigue: 0, /*0-100 increases dramatically at heigher weights due to walking */
+gluttony: 0, /*0-10 has a change to increase when eating large amounts of food, or eating while full. */
+money: 0,   
+}>>
+<<set $flags ={
+isAware: 0,
+houseClean: 0, /* 0-10 WIP */
+transport: 0, /*0 walking, 1 bike, 2 car, 3 carpool (Uber can be done at any time to save time and energy.) */
+friendDrive: false,
+sweat: 0,
+lateWork: 0, /*0 early, 1 on time, 2 late */
+lastSlept: 0,
+needSleep: false,
+sinceWorkout: 0,
+hasPhone: false,
+}>>
+<<set $playervar ={
+name: "",
+haircolor: "",
+eyecolor: "",
+}>>
+<<set $display ={
+    fullness: "null",
+    weight: Number($player.weight/1000).toFixed(2),
+    scaleWeight: 0, 
+}>>
+<<set $transport ={
+method: 0,
+location: 0,
+distance: 0,
+}>>

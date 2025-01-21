@@ -1,0 +1,83 @@
+Player Variables
+
+
+name: "", used by <<kara>> Short for character
+fullness: 0, /* Range 1-2000; 500 is normal human fullness 'stretching' tbd */
+maxFullness: 200,
+weight: 61300,  /* in grams */
+gainRate: 0, /* possible variable to be used */
+Calories: 0,
+digestRate: 1,
+height: 175,
+hunger: 400,
+fatigue: 0, /*0-100 increases dramatically at heigher weights due to walking */
+gluttony: 0,
+
+
+Replace numbers with HiEv Healthbar
+
+Exhuastion Mechanic Rework
+If (scene is sittable) {
+    send user to [[ExhuastionScene]]
+}
+
+:: [[ExhaustionScene]]
+
+You sit down because you're too tired, you can either wait here to rest for a while, or call someone to give you a ride. 
+
+Wait / Sit / <<if $flag.hasFriend == true>>call friend<</if>>
+
+Exhuastion Checks are in passageDone
+
+Weight Descriptions 
+
+Describe Stomach, Breasts, and Butt
+
+Weight Level 1
+
+You look upon yourself in the mirror, the clothing you wear draping across your form like the breezing curtains upon a window. Your thin form is very gaunt, with a concave stomach and the beginnings of sucken cheeks. Your breasts are mostly flat, and your butt shares the same fate. <br><br> If someone were to look upon you in public they would most likely assume you were having trouble getting food. 
+
+
+
+
+
+
+
+Strength System 
+
+1-100 increases by 5 for every successful workout, decreases by 5 after 3 days of no workout. 
+
+1-10 = +1 
+11-20 = +2... 
+
+etc 
+
+strength checks 
+
+related Variables
+_roll = the amount on the digestRate
+_rollAmount = amount after player scores
+$player.strength = 1-100 increases by 5 for every successful workout, decreses by 5 after 3 days of no workout 
+
+make this into a widget <<strCheck [dc of check]>> outputs $strResult (boolean)
+
+
+random(1, 12) with a dc of 3 for easy, 6 for normal, 9 for difficult, 12 for very hard, 15 is extremely difficult, 18 is impossible. 
+<<widget "strCheck">>
+<<nobr>>
+<<if $player.str <= 10>><<set _score = 0>>
+<<elseif $player.str <= 20>><<set _score = 1>>
+<<elseif $player.str <= 30>><<set _score = 2>>
+<<elseif $player.str <= 40>><<set _score = 3>>
+<<elseif $player.str <= 50>><<set _score = 4>>
+<<elseif $player.str <= 60>><<set _score = 5>>
+<<elseif $player.str <= 70>><<set _score = 6>>
+<<elseif $player.str <= 80>><<set _score = 7>>
+<<elseif $player.str <= 90>><<set _score = 8>>
+<<elseif $player.str <= 100>><<set _score = 9>>
+<<else>><<set _score = 10>><</if>>
+<<set _roll = random(1, 12)>>
+<<set _rollAmount = _roll + _score>>
+<<if _rollAmount >= $args[0]>><<set $strResult = True>><<else>><<set $strResult = False>><</if>>
+<</nobr>>
+<</widget>>
