@@ -879,10 +879,10 @@ park: true,
             &lt;&lt;set _difficulty = 8&gt;&gt;
           &lt;&lt;elseif _rollAmount &lt; 12&gt;&gt;/* do a 15 minute mile */
             &lt;&lt;set _time = $transport.distance * 15&gt;&gt;
-            &lt;&lt;set _difficulty = 8&gt;&gt;
+            &lt;&lt;set _difficulty = 7&gt;&gt;
           &lt;&lt;elseif _rollAMount &gt; 12&gt;&gt;/* do a 12 minute mile */
             &lt;&lt;set _time = $transport.distance * 12&gt;&gt;
-            &lt;&lt;set _difficulty = 8&gt;&gt;
+            &lt;&lt;set _difficulty = 6&gt;&gt;
           &lt;&lt;/if&gt;&gt;
         &lt;&lt;case 1&gt;&gt;
 
@@ -904,9 +904,11 @@ park: true,
     &lt;&lt;case &quot;Park&quot;&gt;&gt;
   &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="transportEvent" tags="" position="475,475" size="100,100">&lt;&lt;nobr&gt;&gt;
-
-
-
+&lt;&lt;switch $transport.method&gt;&gt;
+&lt;&lt;case 0&gt;&gt;
+&lt;&lt;case 1&gt;&gt;
+&lt;&lt;case 2&gt;&gt;
+&lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 /* create events */</tw-passagedata><tw-passagedata pid="35" name="lookSelf" tags="nobr" position="600,475" size="100,100">&lt;&lt;set _inInspect = true&gt;&gt;&lt;&lt;if $hasPhone == true&gt;&gt;&lt;&lt;else&gt;&gt;
 You take a moment to look down at yourself. &lt;i&gt;WIP&lt;/i&gt; &lt;br&gt;&lt;br&gt;

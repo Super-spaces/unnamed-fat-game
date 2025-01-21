@@ -98,9 +98,11 @@ park: true,
 
 :: transportEvent
 <<nobr>>
-<<switch $transport.methord>>
-
-
+<<switch $transport.method>>
+<<case 0>>
+<<case 1>>
+<<case 2>>
+<</switch>>
 <</nobr>>
 /* create events */
 
