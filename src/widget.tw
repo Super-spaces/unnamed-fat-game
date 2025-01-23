@@ -58,7 +58,7 @@
     <<set $player.gainRate to _foodItemObject.gainRate>>
     <<set $player.fullness += _foodItemObject.fullness>>
     <<set $player.hunger += _foodItemObject.hunger>>
-    <<if _foodItemObject.glutChance >= $rand>><<set $player.glutton += 1>><</if>>
+    <<if _foodItemObject.glutChance >= $rand>><<set $player.gluttony += 1>><</if>>
     /*<<set $peffects.indigestion to _fooditemObject.indigestion>>*/
     /*<<set $foodheader to _foodItemObject.effect>> */
     _foodItemObject.toEat <br><br>
@@ -81,15 +81,18 @@
             /*normal weight decrease */
             <<if $player.fullness <= 0>><<set $player.weight -= ($args[1]*.01)>><</if>>
             /*hunger Decreases */
-            <<if $player.hunger > 0>><<set $player.hunger -= $args[1]*.5+($player.gluttony*.1)>><</if>>
+            <<if $player.hunger > 0>><<set $player.hunger -= $args[1]*.5+20*(($player.weight/500000)*$player.gluttony*.5)>><</if>>
             /*Fatigue Increases */
             <<set $player.fatigue += $args[1]*0.07+(0.07 * ($player.weight/500000))>> /*Number(($player.fatigue+($player.weight/200000*($args[1]*.08))*(($player.fullness/$player.maxFullness)+1)).toFixed(2)) */
             /*stretching */
-            <<if _minute % 10 == 6 || _minute % 10 == 3 || _minute % 10 == 9>>
-                <<if $player.fullness >= $player.fullness*.75 && $rand <= 3>>
-                    <<if $rand <= 1>><<set $player.gluttony += 1>><</if>>
+            <<if $player.fullness >= $player.maxFullness*.65>>
+            <<for _i = 0; _i < $args[1]; _i++>>
+                <<set _random = random(1,10000)>>
+                <<if _random <= 150>>
+                    <<if _random <= 50>><<set $player.gluttony += 1>><</if>>
                     <<set $player.maxFullness += 5>>
                 <</if>>
+            <</for>>
             <</if>>
             /* <<if $flags.fatlust == true>>
             <<set $player.lust = Number(($player.lust+($player.weight*.01*($args[1]))).toFixed(2))>>

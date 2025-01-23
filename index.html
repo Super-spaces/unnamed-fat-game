@@ -866,23 +866,26 @@ park: true,
 }&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;set aware&quot;&gt;&gt;&lt;&lt;set $flags.isAware = 1&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="toEat" tags="" position="1500,1200" size="100,100">&lt;&lt;toEat&gt;&gt;
 &lt;&lt;return&gt;&gt;
-/*&lt;&lt;unset $foodItem&gt;&gt;*/</tw-passagedata><tw-passagedata pid="33" name="transportInt" tags="" position="350,475" size="100,100">&lt;&lt;nobr&gt;&gt;
-  &lt;&lt;strCheck 0 false&gt;&gt;
+/*&lt;&lt;unset $foodItem&gt;&gt;*/</tw-passagedata><tw-passagedata pid="33" name="transportInt" tags="nobr" position="350,475" size="100,100">&lt;&lt;strCheck 0 false&gt;&gt;
     &lt;&lt;switch $transport.method&gt;&gt;
     &lt;&lt;set _adjust = random(0,2)&gt;&gt;
         &lt;&lt;case 0&gt;&gt;
           &lt;&lt;if _rollAmount &lt; 3&gt;&gt;/* do a 20 minute mile */
             &lt;&lt;set _time = $transport.distance * 20&gt;&gt;
             &lt;&lt;set _difficulty = 8&gt;&gt;
+            You stub your toe while walking to your destination, your cursing and your groans brings many people&#39;s attention to you. 
           &lt;&lt;elseif _rollAmount &lt; 6&gt;&gt;/* do a 18 minute mile */
             &lt;&lt;set _time = $transport.distance * 18&gt;&gt;
             &lt;&lt;set _difficulty = 8&gt;&gt;
+            You walk at a decent pace to your destination. 
           &lt;&lt;elseif _rollAmount &lt; 12&gt;&gt;/* do a 15 minute mile */
             &lt;&lt;set _time = $transport.distance * 15&gt;&gt;
             &lt;&lt;set _difficulty = 7&gt;&gt;
+            You walk at a normal pace to your destination. 
           &lt;&lt;elseif _rollAMount &gt; 12&gt;&gt;/* do a 12 minute mile */
             &lt;&lt;set _time = $transport.distance * 12&gt;&gt;
             &lt;&lt;set _difficulty = 6&gt;&gt;
+            You speed down the street with an excellent walking pace, blazing to your destination.
           &lt;&lt;/if&gt;&gt;
         &lt;&lt;case 1&gt;&gt;
 
@@ -902,14 +905,24 @@ park: true,
     &lt;&lt;case &quot;Work&quot;&gt;&gt;Head to work &lt;&lt;work [[Work|workHub]] _time _difficulty&gt;&gt;
     &lt;&lt;case &quot;Supermarket&quot;&gt;&gt;Head to 
     &lt;&lt;case &quot;Park&quot;&gt;&gt;
-  &lt;&lt;/switch&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="transportEvent" tags="" position="475,475" size="100,100">&lt;&lt;nobr&gt;&gt;
+  &lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="transportEvent" tags="nobr" position="475,475" size="100,100">&lt;&lt;set _rand = random(1,10)&gt;&gt;
 &lt;&lt;switch $transport.method&gt;&gt;
-&lt;&lt;case 0&gt;&gt;
-&lt;&lt;case 1&gt;&gt;
-&lt;&lt;case 2&gt;&gt;
+  &lt;&lt;case 0&gt;&gt;
+    &lt;&lt;switch _rand&gt;&gt;
+      &lt;&lt;case 1&gt;&gt;
+      &lt;&lt;case 2&gt;&gt;
+      &lt;&lt;case 3&gt;&gt;
+      &lt;&lt;case 4&gt;&gt;
+      &lt;&lt;case 5&gt;&gt;
+      &lt;&lt;case 6&gt;&gt;
+      &lt;&lt;case 7&gt;&gt;
+      &lt;&lt;case 8&gt;&gt;
+      &lt;&lt;case 9&gt;&gt;
+      &lt;&lt;case 10&gt;&gt;
+    &lt;&lt;/switch&gt;&gt;
+  &lt;&lt;case 1&gt;&gt;
+  &lt;&lt;case 2&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
 /* create events */</tw-passagedata><tw-passagedata pid="35" name="lookSelf" tags="nobr" position="600,475" size="100,100">&lt;&lt;set _inInspect = true&gt;&gt;&lt;&lt;if $hasPhone == true&gt;&gt;&lt;&lt;else&gt;&gt;
 You take a moment to look down at yourself. &lt;i&gt;WIP&lt;/i&gt; &lt;br&gt;&lt;br&gt;
 

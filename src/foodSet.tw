@@ -5,11 +5,12 @@
 /* but for now, we test food */
 <<set $testSlime ={
 name: "testSlime",
-fullness: 100,
+fullness: 50,
 gainRate: 1000,
 digestRate: 1, 
 toEat: "You eat the test slime, it's slimy, and testy. It goes down surprisingly well, all things considered. You feel a little bit more full.",
 hunger: 500,
+glutChance: 5,
 }>>
 <<set $smallMeal ={
 name: "smallMeal",
