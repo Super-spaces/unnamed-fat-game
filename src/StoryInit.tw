@@ -46,6 +46,7 @@ lastSlept: 0,
 needSleep: false,
 sinceWorkout: 0,
 hasPhone: false,
+lastWeighed: 0,
 }>>
 <<set $playervar ={
 name: "",

@@ -38,7 +38,7 @@
 ''_hour:_minute _AMPM'' | $currentday.dowst<br>
 Day: ''$currentday.day''<hr>
 <<hovertip "Player Name <hr> This is your name, you may sometimes be referred to as such.">>Name: $playervar.name<</hovertip>><br>
-<<hovertip "Weight | <<nobr>><<if $display.scaleWeight == 0>>Unknown<<else>><<if $option.measurements == true>><<print $display.scaleWeight>>kgs <<print Number($display.scaleWeight*2.20462).toFixed(2)>>lbs<</if>><</if>><hr>This is your weight described as a word. To know exactly how much you weigh, you'll need to use a scale.<</nobr>>">>Weight: $weightadj <</hovertip>><br>
+<<hovertip "Weight | <<nobr>><<if $display.scaleWeight == 0>>Unknown<<else>><<if $option.measurements == true>><<print $display.scaleWeight>>kgs <<print Number($display.scaleWeight*2.20462).toFixed(2)>>lbs<</if>><</if>><hr>This is your weight described as a word. To know exactly how much you weigh, you'll need to use a scale.<br><br> <i>Last weighed...</i>   <<timeLegible $flags.lastWeighed>> ago<</nobr>>">>Weight: $weightadj <</hovertip>><br>
 Fullness: $player.fullness / $player.maxFullness <br>
 Money: $<<= $player.money>><br>
 <</nobr>><<nobr>>

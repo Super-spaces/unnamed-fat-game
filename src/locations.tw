@@ -65,6 +65,7 @@ You currently weight $display.weight kgs
 
 [[Bathroom]]
 <<set $display.scaleWeight = $display.weight>>
+<<set $flags.lastWeighed = 0>>
 
 :: Bedroom {"position":"900,1200"}
 You enter your bedroom. It's rather sparse at the moment, a strange painting of a flower sits off in the corner next to the shaded window in the center of the wall. You're bed sits in the center of the room, as you left it in the morning. To your right there is your mirror. 
@@ -247,3 +248,36 @@ You arrive into work
 :: workJob
 
 /* this is where i left off */
+
+:: parkHub [nobr]
+
+As you approach the park, the first thing you notice is the stunning greenery that is scattered upon it's massive plot of land. It is quite obvious that whomever takes care of this place spends quite a bit of time, or quite a bit of money, to keep all of the various bushes, trees, flower groves, and others looking pristine. <br><br>
+
+A large walkway surrounds this beautiful park, and a hotdog stand sits not far off. Along with that a outdoor gymnasyium is fully accessable. <br><br>
+
+[[walk|walkPark]]
+[[hotdog|hotdogPark]]
+[[gym|gymPark]]
+
+:: walkPark [nobr]
+<<if $player.fatigue > 90>>
+You're too tired to go on a walk!<br><br>
+
+[[Back|parkHub]]
+<<else>>
+<<strCheck 3 true>>
+<<if $>>
+    <<if $player.fatlevel < 3 && $player.strength < 10>>
+    You attempt to spend the next few minutes walking around the park, but immediately you realize how out of shape you. Even as skinny as you feel you are, by the time you finally get around the whole bar, your muscles are on fire, and your are entirely covered in sweat. 
+    <<set _difficulty 10 >>
+    <<elseif $player.fatlevel < 5>>
+    <<elseif $player.fatlevel < 7>>
+    <<elseif $player.fatlevel < 9>>
+    <<else>>
+    <</if>>
+<<elseif $rollAmount < 6>>
+<<elseif $rollAmount < 9>>
+<<elseif $rollAmount < 12>>
+<<elseif $rollAmount > 12>>
+<</if>>
+

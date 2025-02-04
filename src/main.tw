@@ -28,6 +28,8 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
 
 [[Testing]]
 :: Testing {"position":"1150,600"}
+<<set _timetest = 1000>>
+<<timeLegible _timetest>>
 <<link "workout">><<strCheck 3 true>><</link>>
 <<nm "Sharyl" "Yuuuh, sa my duud">>
 
@@ -64,7 +66,7 @@ park: true,
             <<set _time = $transport.distance * 25>>
             <<set _difficulty = 8>>
             <<if $player.fatlevel < 4>>
-                You stub your toe while walking to your destination, your cursing and your groans brings many people's attention to you.
+                You spend some time walking to your destination, you see the crowd walking by, the buildings towering over you, the many, many cars. It's all so interesting, and so new. So interesting, in fact, that when you look down to see what time it is, you realize that you've been walking far too slow. 
               <<elseif $player.fatlevel <= 6>>>
                 As you walk to your destination, it's quickly becoming apparent that there is far more <i>weight</i> upon your form than before. 
                 You can begin to feel that swaying motion of your hanging stomach, or the jiggling of your large behind. Not to mention the newfound
@@ -89,15 +91,15 @@ park: true,
           <<elseif _rollAmount < 6>>/* do a 18 minute mile */
             <<set _time = $transport.distance * 18>>
             <<set _difficulty = 8>>
-            You walk at a decent pace to your destination. 
+            You spend some time walking to your destination, giving vague attention to those walking by, the strange individuals whom make this city their home. Though, nevertheless, you make good time. 
           <<elseif _rollAmount < 12>>/* do a 15 minute mile */
             <<set _time = $transport.distance * 15>>
             <<set _difficulty = 7>>
-            You walk at a normal pace to your destination. 
+            You do your best to focus entirely on walking, not paying any mind to that which could distract you, and it works. Getting you to your destination in record time. 
           <<elseif _rollAmount > 12>>/* do a 12 minute mile */
             <<set _time = $transport.distance * 12>>
             <<set _difficulty = 6>>
-            You speed down the street with an excellent walking pace, blazing to your destination.
+            You speed down the street with an excellent walking pace, blazing to your destination. Paying no attention to anybody or anything in your way. 
           <</if>>
         <<case 1>>
 
@@ -114,9 +116,9 @@ park: true,
 <br><br>
   <<include "transportEvent">>
   <<switch $transport.location>>
-    <<case "Work">>Head to work <<work [[Work|workHub]] _time _difficulty>>
+    <<case "Work">>Head to Work <<work [[Work|workHub]] _time _difficulty>>
     <<case "Supermarket">>Head to 
-    <<case "Park">>
+    <<case "Park">>Head to the Park <<work [[Park|parkHub]] _time _difficulty>>
   <</switch>>
 
 :: transportEvent [nobr]

@@ -72,6 +72,7 @@
         <<link $args[0]>><<set $currentday.time += $args[1]*60>>
             /*Last slept */<<set $flags.lastSlept += $args[1]*60>>
             /*last workout */<<set $flags.sinceWorkout += $args[1]*60>>
+            /*last weighed */<<set $flags.lastWeighed += $args[1]*60>>
             $args[2]
             /*weight gain and fullness decrease */
             <<if $player.fullness > 0>>
@@ -111,6 +112,7 @@
             /* time increment */ <<set $currentday.time += $args[1]*60>>
             /* last slept */<<set $flags.lastSelpt += $args[1]*60>>
             /* last workout */<<set $flags.sinceWorkout += $args[1]*60>>
+            /* last weighed */<<set $flags.lastWeighed += $args[1]*60>>
             <<if $player.fullness > 0>>
                 <<set $player.fullness -= $args[1] * (.5 * (.5 * $player.digestRate)) * (1 + (3 * ($args[2] / 10)))>>
                 <<set $player.weight += ($player.gainRate * ($args[1] * 0.28))>>
@@ -218,7 +220,7 @@ set _speed to distance * time
 /* Strength Check <<strCheck [DC] [isWorkout?]>> */
 <<widget "strCheck">>
 <<nobr>>
-<<if $player.str <= 10>><<set _score = 0>>
+<<if $player.str <= 10>><<set _score = -1>>
 <<elseif $player.str <= 20>><<set _score = 1>>
 <<elseif $player.str <= 30>><<set _score = 2>>
 <<elseif $player.str <= 40>><<set _score = 3>>
@@ -245,8 +247,42 @@ set _speed to distance * time
 <<if _rollAmount >= $args[0]>><<set $strResult = true>><<else>><<set $strResult = false>><</if>>
 <<if $args[1] == true>>
     <<set $flags.sinceWorkout = 0>>
-    <<set _rollGoal = _score + 10>>
+    <<set _rollGoal = $args[0] + 6>>
     <<if _rollAmount >= _rollGoal>><<set $player.str += 5>><</if>>
 <</if>>
 <</nobr>>
+<</widget>>
+<<widget "timeLegible">>
+    <<set _time = $args[0]>>
+    <<set _hourLegible = 0>>
+    <<set _dayLegible = 0>>
+    <<set _minuteLegible = 0>>
+    <<if $args[0] > 86400>>
+        <<for _i = 86400; _i < _time; _fuckoff = "lmao">>
+        <<set _dayLegible++>>
+        <<set _time -= _i>>
+        <</for>>
+    <</if>>
+    <<if $args[0] > 3600>>
+        <<for _i = 3600; _i < _time; _fuckoff = "lmao">>
+        <<set _hourLegible++>>
+        <<set _time -= _i>>
+        <</for>>
+    <</if>>
+    <<if $args[0] >= 60>>
+        <<for _i = 60; _time >= _i; _fuckoff = "no">>
+            <<set _minuteLegible++>>
+            <<set _time -= _i>>
+        <</for>>
+    <</if>>
+    <<if _dayLegible == 1>>_dayLegible day and
+    <<elseif _dayLegible > 1>>_dayLegible day and
+    <</if>>
+    <<if _hourLegible == 1>>_hourLegible hour and
+    <<elseif _hourLegible > 1>>_hourLegible hours and
+    <</if>>
+    <<if _minuteLegible == 1>>_minuteLegible minute
+    <<elseif _minuteLegible > 1>>_minuteLegible minutes
+    <</if>>
+    <<if _time != 0>> and _time seconds<</if>>
 <</widget>>
