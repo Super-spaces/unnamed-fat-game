@@ -34,6 +34,7 @@ hunger: 400,
 fatigue: 0, /*0-100 increases dramatically at heigher weights due to walking */
 gluttony: 0, /*0-10 has a change to increase when eating large amounts of food, or eating while full. */
 money: 0,   
+confidence: 0,
 }>>
 <<set $flags ={
 isAware: 0,
@@ -49,7 +50,7 @@ hasPhone: false,
 lastWeighed: 0,
 }>>
 <<set $playervar ={
-name: "",
+name: "Kara",
 haircolor: "",
 eyecolor: "",
 }>>

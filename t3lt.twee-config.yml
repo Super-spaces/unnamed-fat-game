@@ -21,3 +21,5 @@ sugarcube-2:
       name: toEat
     weightadj:
       name: weightadj
+    timeLegible:
+      name: timeLegible

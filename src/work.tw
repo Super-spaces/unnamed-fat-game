@@ -1,0 +1,241 @@
+
+:: workHub [nobr]
+<<if $currentday.dayofweek == 0 || $currentday.dayofweek == 6>>You come into work on a weekend...<br><br>[[Leave|preTownHub]]<<elseif $timedata.hour < 5 || $timedata.hour >= 17>>You arrive at work afterhours...<br><br>[[Leave|preTownHub]]<<else>>
+<<if $firstTime.work == true>><<goto workIntro>><</if>>
+You arrive into work 
+<<if $timedata.hour > 5 || $timedata.hour < 7>><<set $flags.lateWork = 0>><</if>>
+<<if $timedata.hour == 7>><<set $flags.lateWork = 1>><</if>>
+<<if $timedata.hour > 8 || $timedata.hour < 17>><<set $flags.lateWork = 2>><</if>>
+<<switch $flags.lateWork>>
+    <<case 0>><i>early</i>
+    <<case 1>><i>on time</i>
+    <<case 2>><i>late</i>
+<</switch>>
+
+<br><br><<move [[Begin Work|workJob]] 10>>
+<</if>>
+
+:: workJob [nobr]
+<<if $firstTime.work == true>><<goto [[workIntro]]>><</if>>
+You spin around in your chair quickly and move to get to work. Sorting your incoming documents, going through your emails, getting everything in line as you begin.<br><br>
+/* Get to work, run into event, then give player options to do next thing. */
+<<switch $rand>>
+    <<case 1>>But as you begin, you begin to hear voices in your office... murmurs of... [[Donuts?|workDonut]]
+    <<case 2>>But as you begin, someone stops to give you [[a visit...|workJamie]]
+    <<case 3>>But as you begin, someone stops to give you [[a visit...|workSarah]]
+    <<case 4>>But as you begin, you here some commotion in [[the break room|workVending]]
+    <<case 5>>[[Continue...|WorkJob2]]
+    <<case 6>>[[Continue...|WorkJob2]]
+    <<case 7>>But as you begin, someone stops to give you [[a visit...|workPhil]]
+    <<case 8>>[[Continue...|WorkJob2]]
+    <<case 9>>[[Continue...|WorkJob2]]
+    <<case 10>>[[Continue...|WorkJob2]]
+<</switch>>
+
+:: workDonut [nobr]
+
+Murmurs of someone bringing donuts of some variety are whispered through the cubicles. You crane your head in curiosity, yet from where you sit you have no view of the break room. <br><br>
+
+Do you stand up to investigate? <br><br>
+
+[[Yes|workDonutYes]]<br>
+[[No|workDonutNo]]
+
+:: workDonutYes [nobr]
+<<if $player.fatlevel > 4>>
+You hoist yourself up from your desk, prying your bloated behind from the chair and begin to walk over to the break area. Your destination of fatting food making the rubbing of your thighs more apparent in your mind. <br><br>
+
+Yet, as you expected, there are indeed donuts in the break room. A good number in fact, three whole boxes of a dozen each. There are glazed, frosted, bear claws, anything and everything you could have ever wanted. Your mouth waters at the temptation. <br><br>
+<<elseif $player.fatlevel > 6>>
+You wrench yourself up from your desk, having to try a few times to get your massive ass out of your very undersized chair, before waddling slowly over to the break room. Despite your best efforts, even at the fifty or so feet that you had walked, you find yourself slowly growing out of breath. <br><br>
+
+Yet, as you expected, there are indeed donuts in the break room. A good number in fact, three whole boxes of a dozen each. There are glazed, frosted, bear claws, anything and everything you could have ever wanted. Your mouth waters at the temptation, and you find yourself instinctually reaching for one. <br><br>
+<<else>>
+You stand up from your desk, slowly wandering over to the break room. Finding, just as you had heard, there were indeed donuts. <br><br>
+
+A good number in fact, three whole boxes of a dozen each. There are glazed, frosted, bear claws, anything and everything you could have ever wanted. <br><br>
+
+<</if>>
+
+What do you do? <br><br>
+
+    <<if $player.gluttony <= 3>>
+        <<if $player.maxFullness - $player.fullness > 20>>
+            <<link [[Eat just one...|toEat]]>>
+                <<set $donuts ={
+                    name: "donuts",
+                    fullness: 20,
+                    gainRate: 1,
+                    digestRate: 1,
+                    toEat: "You grab one of the donuts from the break room, and chow down. It's delicious! You feel slightly more content.",
+                    hunger: 150,
+                    glutChance: 1,
+                }>>
+                <<set $foodItem = $donuts>>
+            <</link>><br>
+            <<else>><br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony <= 5>>
+        <<if $player.maxFullness - $player.fullness > 60>>
+        <<link [[Eat a couple...|toEat]]>>
+            <<set $donuts ={
+                    name: "donuts",
+                    fullness: 60,
+                    gainRate: 1,
+                    digestRate: 1,
+                    toEat: "You grab a couple of the donuts from the break room and take them back to your desk. You eat them quickly and without thought, they are delicious. But after you're done you're covered in crumbs and glaze. You try your best to clean yourself off and get back to work.",
+                    hunger: 300,
+                    glutChance: 5,
+                }>>
+             <<set $foodItem = $donuts>>
+        <</link>>
+            <<else>>You are too full to eat more than one donut!<br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=5>>
+        <<if $player.maxFullness - $player.fullness > 120>>
+        <<link [[Take a box.|toEat]]>>
+            <<set $donuts ={
+                    name: "donuts",
+                    fullness: 120,
+                    gainRate: 1.5,
+                    digestRate: 1,
+                    toEat: "You grab an entire box of donuts from the break room. You get a couple stares of varying emotions as you carry it back to your desk. You slam the box down and chow down with reckless abandon as you pratically coat yourself in all of the different parts of donuts. After you finish you can't help but phyiscally feel bloated and heavy, all of the sugar weighing you down. You try your best to clean yourself off and get back to work.",
+                    hunger: 450,
+                    glutChance: 10,
+                }>>
+            <<set $foodItem = $donuts>>
+        <</link>><br>
+            <<else>>You are too full to eat more than a couple donuts!
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=7>>
+        <<if $player.maxFullness - $player.fullness > 240>>
+        <<link [[Eat them all.|toEat]]>>
+            <<set $donuts ={
+                    name: "donuts",
+                    fullness: 20,
+                    gainRate: 1,
+                    digestRate: 1,
+                    toEat: "You start grabbing haphazardly at the donuts in the break room, not entirely caring about any of the consquences. More and more food covers your body as you down more and more of the donuts. You can't see them, but you can feel the stares of your coworkers as they judge you for the pig you are making of yourself. But they are just so good... You need more, you want more... You have to have more. Everything in your body is telling you eat more and more, and who are you to say no?. <br><br> Before you can even think about what you're doing, the donuts are gone and you stand near three empty boxes. Are you happy?",
+                    hunger: 150,
+                    glutChance: 0,
+                }>>
+            <<set $foodItem = $donuts>>
+        <</link>><br>
+            <<else>>You are too full to eat more than a box of donuts!
+        <</if>>
+    <</if>>
+<br>
+
+<<if $player.gluttony < 3>>[[Leave|WorkEndOfDay]]<</if>>
+:: workIntro [nobr]
+"Van Papers"<br><br>
+
+Your mind is bouncing back and forth between what a company named like that could possibly produce, but like most things your first guess was correct. You approach the building, a tall office building, with the only break in it's grey concrete walls being the many windows that spattered the side of the building like an oppresive net.<br><br>
+
+"Van Papers: A Paper Company"<br><br>
+
+You had hoped that whatever job you had been offered would be somewhat interesting, but with the product offered, you didn't have high hopes now. You enter the building through the large glass double doors, speaking to a disinterested secretary who informs you that you'll be waiting for the next dozen or so minutes while whomever you'll be talking to get their ducks in a row. You sit anxiously in your seat, wondering what will happen, wondering what this interaction is going to be like, until your name is called. <br><br>
+
+<<nm "boss" "<<kara>>?">> A voice rings throughout the rather quiet waiting room, your name called, loud and clear for all to hear.<br><br> 
+
+How do you approach this situation?<br><br>
+<<link [[Confidently|workIntroConfident]]>><<set $player.confidence = 30>><</link>><br>
+<<link [[Meek|workIntroMeek]]>><<set $player.confidence = 10>><</link>><br>
+<<link [[Calm|workIntroCalm]]>><<set $player.confidence = 20>><</link>><br>
+
+:: workIntroConfident [nobr]
+You confidently annouce your presense as you hear your name called, more than ready to get this show on the road and get this next chapter in your life started. <br><br>
+
+The man approaches you, smile wide upon his older face. His blond hair slicked back and his tan suit dangling around his thin form. <<nm "boss" "<<kara>>! Very nice to meet you, You've come at the perfect time! My name is Phillip, you can call me Phil, I am the Lead Financial Architect here at Van Paper's and I'll be the one showing you around today, does that sound alright?">><br><br>
+
+You nod emphatically, this man's bright demeaner filling your form with even more drive, agreeing with his statements you state your excitement to work for the company and his smile grows even wider. <br><br>
+
+<<nm "boss" "Great to hear! I think we'll do great things together.">> He says, his tone refined and practiced like a salesman ready to go. <br><br>
+
+After your quick conversation, he shows you around the office space. It becomes quite apparant that this place definitely sells paper, and lots of it. There are engineering departments to design new types of paper and new ways to create it, there are marketing departments to figure out ways to sell the paper, and there even are quality control departments to test the paper before it gets mass produced. It's a little bit crazy, but you nod along just as well.<br><br>
+
+<<nm "boss" "So, to make all of these things run, we're going to need some data munchers, and that's where you come in!~">> Your boss tells you as walk down another one of the many long corridors within this deceptively large building. <<nm "boss" "You are your wonderful teammates are going to take in the numbers from our recent sales and compile them into easy to read and extremely useful spreadsheets that we can then base our major decisions upon. Ah! Here we are...">><br><br>
+
+You both turn the corner, seeing Phil motion across another large cubicle farm where many different individuals sit typing away in a monotonous boring office space. Most of the individuals look bored, others look intensely engrossed in their work, some others wave. You wave back. Phil leads you to one of the many empty cubicles and pulls out there chair. <<nm "boss" "Here is where you'll be spending most of your time... Here! Take a seat. I'll go ahead and get your team lead, and he'll show you what you need to know.">> <br><br>
+
+Phil wanders off, leaving you alone at your office space giving you the quickest moment to see what you're working with. You see one monitor before you, a small keyboard and a mouse, and a otherwise completely empty deskspace. A very dreary sight if you had to say, even compared to the other desks in the area with their colorful desk trinkets.<br><br>
+
+Eventually, Phil returns, this time with another man in tow, a thinner man, brown hair, handsome in a way, and very confused. <<nm "ryan" "Phil, you said we weren't getting any new hires soon thoug-">> The man said before Phil looked towards him with a glare that could kill, before his smile widened and his demeanor softened.<br><br>
+
+<<nm "boss" "So, <<kara>>, this is Ryan! He's the team lead for the data analysts here, and he'll go ahead and get you started!">> Phil spoke as that aggressively contagious smile grew once again. <br><br>
+
+[[Get to work|workIntro2]]<<set $firstTime.work = false>>
+
+
+:: workIntroMeek [nobr]
+
+As your name echoes through the room, you feel your cheeks flush and your heart begins to race. You step forward hesitantly, meeting Phillip's warm smile with a nervous one of your own.<br><br>
+
+The man approaches you, smile wide upon his older face. His blond hair slicked back and his tan suit dangling around his thin form. You instinctively recoil as he approaches. <<nm "boss" "Oh, hello, <<kara>>! Very nice to meet you, You've come at the perfect time! My name is Phillip, but you can call me Phil, I am the Lead Financial Architect here at Van Paper's and I'll be the one showing you around today, does that sound alright?">><br><br>
+
+You nod slowly, not making eye contact, this man's bright demeaner filling your form with even more anxiety, you try to agree with his statements but you're words are muffled and you're far too quiet. His smile widens anyway. <br><br>
+
+<<nm "boss" "Great to hear! I think we'll do great things together.">> He says, his tone refined and practiced like a salesman ready to go, though he didn't seem to think much about what you said. <br><br>
+
+After your quick conversation, he shows you around the office space. It becomes quite apparant that this place definitely sells paper, and lots of it. There are engineering departments to design new types of paper and new ways to create it, there are marketing departments to figure out ways to sell the paper, and there even are quality control departments to test the paper before it gets mass produced. It's a little bit crazy, but you nod along just as well.<br><br>
+
+<<nm "boss" "So, to make all of these things run, we're going to need some data munchers, and that's where you come in!~">> Your boss tells you as walk down another one of the many long corridors within this deceptively large building. <<nm "boss" "You are your wonderful teammates are going to take in the numbers from our recent sales and compile them into easy to read and extremely useful spreadsheets that we can then base our major decisions upon. Ah! Here we are...">><br><br>
+
+You both turn the corner, seeing Phil motion across another large cubicle farm where many different individuals sit typing away in a monotonous boring office space. Most of the individuals look bored, others look intensely engrossed in their work, some others wave. You blush and lower your head, trying to keep the attention away from you. Phil leads you to one of the many empty cubicles and pulls out there chair. <<nm "boss" "Here is where you'll be spending most of your time... Um... Here! Take a seat. I'll go ahead and get your team lead, and he'll show you what you need to know.">> <br><br>
+
+Phil wanders off, leaving you alone at your office space giving you the quickest moment to see what you're working with. You see one monitor before you, a small keyboard and a mouse, and a otherwise completely empty deskspace. A very dreary sight if you had to say, even compared to the other desks in the area with their colorful desk trinkets.<br><br>
+
+Eventually, Phil returns, this time with another man in tow, a thinner man, brown hair, handsome in a way, and very confused. <<nm "ryan" "Phil, you said we weren't getting any new hires soon thoug-">> The man said before Phil looked towards him with a glare that could kill, before his smile widened and his demeanor softened.<br><br>
+
+<<nm "boss" "So, <<kara>>, this is Ryan! He's the team lead for the data analysts here, and he'll go ahead and get you started!">> Phil spoke as that aggressively contagious smile grew once again. <br><br>
+
+[[Get to work|workIntro2]]<<set $firstTime.work = false>>
+
+:: workIntroCalm [nobr]
+
+As your name resounds through the room, you maintain a composed demeanor, your heart beating steadily despite the circumstances. You advance with confidence, returning Phillip's warm smile with one equally genuine yet calm.<br><br>
+
+<<nm "boss" "Kara! Welcome aboard. I'm Phillip, but please call me Phil. I'll be guiding you today.">><br><br>
+
+You respond with a smooth greeting, adjusting your clothes as you stand up, taking in the office environment with curiosity rather than nervousness.<br><br>
+
+<<nm "boss"  "I believe we're going to accomplish great things together.">> You reply with a composed nod and a confident smile.<br><br>
+
+As Phil leads you through the bustling office, you observe the various departments with interest, absorbing the scale of operations without feeling intimidated. Your hands remain relaxed at your sides as you listen attentively to Phil's explanations.<br><br>
+
+<<nm "boss" "So, to make all of these things run, we're going to need some data munchers, and that's where you come in!~">> Your boss tells you as walk down another one of the many long corridors within this deceptively large building. You do your best to maintain your composure. <<nm "boss" "You are your wonderful teammates are going to take in the numbers from our recent sales and compile them into easy to read and extremely useful spreadsheets that we can then base our major decisions upon. Ah! Here we are...">><br><br>
+
+You both turn the corner, seeing Phil motion across another large cubicle farm where many different individuals sit typing away in a monotonous boring office space. Most of the individuals look bored, others look intensely engrossed in their work, some others wave. Phil leads you to one of the many empty cubicles and pulls out there chair. <<nm "boss" "Here is where you'll be spending most of your time... Here! Take a seat. I'll go ahead and get your team lead, and he'll show you what you need to know.">> <br><br>
+
+Phil wanders off, leaving you alone at your office space giving you the quickest moment to see what you're working with. You see one monitor before you, a small keyboard and a mouse, and a otherwise completely empty deskspace. A very dreary sight if you had to say, even compared to the other desks in the area with their colorful desk trinkets.<br><br>
+
+<<nm "ryan" "Phil, I thought we weren't expecting any new hires so-">> Phil silences him with a strong look before his warm demeaner opens up once again. You meet the gazes of 
+those present with poise and confidence.<br><br>
+
+<<nm "boss" "Kara, this is Ryan. He'll assist you in getting started.">><br><br>
+
+You greet Ryan with a composed smile, before taking your 
+seat at your desk, feeling ready to contribute to your new environment despite Phil's energetic 
+demeanor.<br><br>
+
+[[Get to work|workIntro2]]<<set $firstTime.work = false>>
+
+:: workIntro2
+
+<<nm "boss" "Well! If that's all, I best be off! I hope that you enjoy your time at Van Papers!">> Phil words echo through the cubicle as he weirdly struts out of the room like neither of you are standing right there.<br><br>
+
+Ryan rubs the back of his neck as you sit in your chair patiently. <<nm "ryan" "Well... Um... Hi, <<kara>>. I'm Phil, l- like he said. I'll be you're supervisor I... guess.">> Ryan says, obviously very confused with the outcome of this situation. <br><br>
+
+<<nm "ryan" "So... basically...">> Ryan breaks away from eye contact and looks towards the locked computer in front of you. <<nm "ryan" "You'll log into this computer, and I'll send you some spreadsheets everday, you're job will be to sort those spreadsheets in a way that'll make the big wigs not lose their minds because the data is too dirty.">><br><br>
+
+As Ryan speaks his hands move around in big circles and he points towards different places in the building. <<nm "ryan" "um, don't worry! I'll include instructions on what to do and how to do it but uh, don't mess up I guess. That's about it though- oh! if you work hard you might get a raise, so make sure to um... put your back into it.">><br><br>
+
+<i>Mechanics of <b>work!</b><br><br>
+So basically, everytime you go to work you'll be 'tested' mechanically against a few different traits. How late you are, how much tired you are, and well you can do your job.<br><br>
+
+If all of those are good, you'll do good! If one of those is bad, you'll do okay, if more than one of those are bad... Well, maybe you'll run into some problems.</i><br><br>
+
+<<link "continue">><<goto [[workJob]]>><</link>>

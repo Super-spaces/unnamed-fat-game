@@ -1,5 +1,6 @@
 :: PassageHeader [nobr] {"position":"1725,600"}
 <<nobr>><<silently>>
+/*random numbers  */
 <<set $rand = random(1,10)>>
 /* if it's been to long since a workout, decrease strength */
 <<if $flags.sinceWorkout > 259200>><<set $player.str -= 5>><<set $flags.sinceWorkout 0>><</if>>

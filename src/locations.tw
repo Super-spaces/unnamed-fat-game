@@ -232,23 +232,6 @@ As you go to leave your house, you consider for a moment how you will get to you
 
 <<move [[Go Home|houseHub]] 10>>
 
-:: workHub 
-<<nobr>>
-<<if $currentday.dayofweek == 0 || $currentday.dayofweek == 6>>You come into work on a weekend...<br><br>[[Leave|preTownHub]]<<elseif $timedata.hour < 5 || $timedata.hour >= 17>>You arrive at work afterhours...<br><br>[[Leave|preTownHub]]<<else>>
-You arrive into work 
-<<switch $flags.lateWork>>
-    <<case 0>><i>early</i>
-    <<case 1>><i>on time</i>
-    <<case 2>><i>late</i>
-<</switch>>
-
-<br><br><<move [[Begin Work|workJob]] 10>>
-<</if>>
-<</nobr>>
-:: workJob
-
-/* this is where i left off */
-
 :: parkHub [nobr]
 
 As you approach the park, the first thing you notice is the stunning greenery that is scattered upon it's massive plot of land. It is quite obvious that whomever takes care of this place spends quite a bit of time, or quite a bit of money, to keep all of the various bushes, trees, flower groves, and others looking pristine. <br><br>

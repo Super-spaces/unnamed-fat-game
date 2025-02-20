@@ -26,6 +26,8 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
 
 [[Begin|gameStart]]
 
+[[Skip Intro|houseHub]]
+
 [[Testing]]
 :: Testing {"position":"1150,600"}
 <<set _timetest = 1000>>
@@ -67,13 +69,13 @@ park: true,
             <<set _difficulty = 8>>
             <<if $player.fatlevel < 4>>
                 You spend some time walking to your destination, you see the crowd walking by, the buildings towering over you, the many, many cars. It's all so interesting, and so new. So interesting, in fact, that when you look down to see what time it is, you realize that you've been walking far too slow. 
-              <<elseif $player.fatlevel <= 6>>>
+              <<elseif $player.fatlevel <= 6>>
                 As you walk to your destination, it's quickly becoming apparent that there is far more <i>weight</i> upon your form than before. 
                 You can begin to feel that swaying motion of your hanging stomach, or the jiggling of your large behind. Not to mention the newfound
                 force required to even lift either of those fat covered legs, each one rubbing dangerously close into each other. You feel sweat beading at your brow and in between those new rolls upon your body. 
                 This unfamiliarity with your form is making it much harder to keep up a healthy walking pace, and it takes you a lot longer to get where you are wanting to go. 
                 <br><br> <i>Maybe you should work out?</i> 
-              <<elseif $player.fatlevel <= 8>>>
+              <<elseif $player.fatlevel <= 8>>
                 With every step you take, you feel the significant amount of excess lard that sits upon your body sways and jiggles 
                 with inertia. It's taking everything you have to move with that heavy weight upon your body. Your apron like stomach sways,
                 the fat on your arms and legs shifts fat rubbing heavily against fat, and everything else jiggles. Within minutes you feel far more exhausted than you ever did

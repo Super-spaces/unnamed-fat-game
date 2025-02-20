@@ -10,6 +10,12 @@
 .agent {
 	color:grey
 }
+.boss {
+	color:yellow
+}
+.ryan {
+	color:greenyellow
+}
 
 /* Horizontal Health Bar - Start */
 .hzbarbkg {  /* default class for all horizontal bar backgrounds */
