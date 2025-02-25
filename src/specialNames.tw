@@ -8,6 +8,7 @@
 <<if $player.fullness < 0>><<set $player.fullness = 0>><</if>>
 <<if $player.hunger > 1000>><<set $player.hunger = 1000>><</if>>
 <<if $player.hunger < 0>><<set $player.hunger = 0>><</if>>
+<<if $player.fatigue > 100>><<set $player.fatigue = 100>><</if>>
 /*Display Variables */
 <<set $display.weight = Number($player.weight/1000).toFixed(2)>>
 <<if $player.fullness == 0>>
@@ -58,7 +59,7 @@ Money: $<<= $player.money>><br>
     <<elseif $player.fatigue >= 20 and $player.fatigue < 30>>Awake
     <<elseif $player.fatigue >= 30 and $player.fatigue < 60>>Content
     <<elseif $player.fatigue >= 60 and $player.fatigue < 80>>Tired
-    <<elseif $player.fatigue >= 80 and $player.fatigue < 100>>Exhausted
+    <<elseif $player.fatigue >= 80 and $player.fatigue <= 100>>Exhausted
 <</if>><</hovertip>>
 /*Lust Bar */
 <<if $player.lust > 10>><<hovertip "<b>Lust</b><hr>This is your current lust. If you let this get too far, you might find yourself harder to please.">>❤️‍🔥:<</hovertip>><</if>>
@@ -69,7 +70,7 @@ Money: $<<= $player.money>><br>
     <<elseif $player.lust >= 90 and $player.lust < 100>>Necessary
 <</if>>
 <hr>
-/*<<if $flags.sweat == true>><div class="sweat"><<hovertip "<b>Sweating</b><hr>You are sweating!">>💦<</hovertip>></div><</if>>*/
+<<if $flags.sweat == true>><div class="sweat"><<hovertip "<b>Sweating</b><hr>You are sweating!">>💦<</hovertip>></div><</if>>
 <<if $player.hunger < 300>><div class="hungry"><<hovertip "<b>Hungry</b><hr>You are Hungry!">>🍴<</hovertip>></div><</if>>
 /*<<if $player.lust > 70>><div class="horny"><<hovertip "<b>Horny</b><hr>You are horny!">>💗<</hovertip>></div><</if>>
 <<if $player.fatigue > 60>><div class="sleepy"><<hovertip "<b>Tired</b><hr>You are tired!">>💤<</hovertip>></div><</if>>*/

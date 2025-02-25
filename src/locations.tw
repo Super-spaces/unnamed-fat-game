@@ -245,7 +245,7 @@ A large walkway surrounds this beautiful park, and a hotdog stand sits not far o
 :: walkPark [nobr]
 <<if $player.fatigue > 90>>
 You're too tired to go on a walk!<br><br>
-
+<</if>>
 [[Back|parkHub]]
 <<else>>
 <<strCheck 3 true>>

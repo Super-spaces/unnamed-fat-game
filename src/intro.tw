@@ -95,7 +95,7 @@ You spin out of your bed, still in your work clothes from the night before, and 
 
 They don't seem to be asking for any information to use against you, they doesn't seem to be any specific loop holes or hidden text, but you aren't a lawyer you honestly couldn't tell. <br><br>
 
-But what was their to lose?<br><br>
+But what was there to lose?<br><br>
 
 [[Time to fill out some paperwork...| gameIntro]]
 
@@ -105,7 +105,7 @@ But what was their to lose?<br><br>
 
 :: gameIntro 
 <<nobr>>
-The next two weeks of your life are the most hectic weeks you have ever had in your life. Only a day after shipping the documents to the request location, you are reached out via email to meet with an agent at their office quite literally down the street from the halfway house. <br><br>
+The next two weeks of your life are more hectic then anything you've ever experienced. Only a day after shipping the documents to the request location, you are reached out via email to meet with an agent at their office quite literally down the street from the halfway house. <br><br>
 
 You meet with them, they introduce themselves as <b><<nm "agent" "Agent Taren">></b>, and they then describe to you how everything will be working. <br><br>
 
@@ -138,15 +138,7 @@ You know that you don't have work until Tomorrow at 9 am, so it would seem you h
 
 [[Let's begin...|houseHub]]
 <</linkreplace>><</linkreplace>>
-<<set $firstTime ={
-work: true,
-supermarket: true,
-bathroom: true,
-bedroom: true,
-kitchen: true,
-townhub: true,
-park: true,
-}>>
+
 <</nobr>>
 
 :: supermarketIntro

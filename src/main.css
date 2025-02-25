@@ -16,7 +16,18 @@
 .ryan {
 	color:greenyellow
 }
-
+.jamie {
+	color:purple
+}
+.ceo {
+	color:red
+}
+.gary {
+	color:darkgrey
+}
+.sarah {
+	color:blue
+}
 /* Horizontal Health Bar - Start */
 .hzbarbkg {  /* default class for all horizontal bar backgrounds */
 	position: relative;

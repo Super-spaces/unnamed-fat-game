@@ -1,8 +1,19 @@
 
 :: workHub [nobr]
+<<set $workDifficulty = 1>>
 <<if $currentday.dayofweek == 0 || $currentday.dayofweek == 6>>You come into work on a weekend...<br><br>[[Leave|preTownHub]]<<elseif $timedata.hour < 5 || $timedata.hour >= 17>>You arrive at work afterhours...<br><br>[[Leave|preTownHub]]<<else>>
 <<if $firstTime.work == true>><<goto workIntro>><</if>>
-You arrive into work 
+<<if $player.fatlevel > 3>>
+You push open the doors to Van Papers and are intricatly aware of all of the weight that now sits upon your frame. The way your clothes now hang tight against your skin, or the few new rolls that sit creasing your clothing and making your recent actions far more obvious. 
+<<elseif $player.fatlevel > 5>>
+You push open the door to Van Papers, the short walk to the front of the building taking more out of you then you remember. Your mind now on the topic, you feel the jiggling, the rubbing, the shifting of all this new weight upon your body. All of this new weight changing everything, and attracting far more unwanted attention before as people watch you waddle your way to whatever your next destination will be. 
+<<elseif $player.fatlevel > 7>>
+You give a weighty huff as you shove open the door to Van Papers, the short walk to the front of the building leaving you breathless you crave the sanctity of your desk. You know without even looking that almost every part of you is wobbling and shifting with every shift of your leg. Which of course each step you take is far more effort then it ever should be. You can feel the sweat beading at your brow as the effort of just moving your fat ass is taking everything you have. 
+<<elseif $player.fatlevel > 9>>
+You give a pained wheeze as someone holds the door open for you at Van Papers, the short walk feels more like a mile long trek with your short fat hampered steps. Each one causing your leg to slam into the back of your apron like belly. Sweat liberally pours down your head and coats all of the little crevices your many rolls create. You crave the sanctity of your desk more than anything, at least until you have to make this walk all over again in eight hours. 
+<<elseif $player.fatlevel > 11>>
+<</if>>
+You've arrived at work 
 <<if $timedata.hour > 5 || $timedata.hour < 7>><<set $flags.lateWork = 0>><</if>>
 <<if $timedata.hour == 7>><<set $flags.lateWork = 1>><</if>>
 <<if $timedata.hour > 8 || $timedata.hour < 17>><<set $flags.lateWork = 2>><</if>>
@@ -24,14 +35,99 @@ You spin around in your chair quickly and move to get to work. Sorting your inco
     <<case 2>>But as you begin, someone stops to give you [[a visit...|workJamie]]
     <<case 3>>But as you begin, someone stops to give you [[a visit...|workSarah]]
     <<case 4>>But as you begin, you here some commotion in [[the break room|workVending]]
-    <<case 5>>[[Continue...|WorkJob2]]
-    <<case 6>>[[Continue...|WorkJob2]]
+    <<case 5>><<work [[Continue...|workEndOfDay]] 240 3>>
+    <<case 6>><<work [[Continue...|workEndOfDay]] 240 3>>
     <<case 7>>But as you begin, someone stops to give you [[a visit...|workPhil]]
-    <<case 8>>[[Continue...|WorkJob2]]
-    <<case 9>>[[Continue...|WorkJob2]]
-    <<case 10>>[[Continue...|WorkJob2]]
-<</switch>>
+    <<case 8>><<work [[Continue...|workEndOfDay]] 240 3>>
+    <<case 9>><<work [[Continue...|workEndOfDay]] 240 3>>
+    <<case 10>><<work [[Continue...|workEndOfDay]] 240 3>>
+<</switch>><br><br>
+<<link "Debug refresh">><<goto [[workJob]]>><</link>>
 
+:: workJamie [nobr]
+
+As you begin your workday, drudging through the many different documents sent your way to sort and assign. Someone stops by... <br><br>
+<<if $npcFlags.jamie <1>>
+<<nm "jamie" "You need to get these documents filled out by the end of the day.">> A woman's voice snaps you out of your work flow, a pile of papers almost a foot thick slam on top of your desk. <br><br>
+
+<<linkreplace "Take a look at the woman...">>You spin to look at the woman who has walked up towards your desk. You see a rather young individual on the shorter side, dark straight hair pulled behind her ears, piercing brown eyes, a thinner form. Though the one thing that sticks out more than anything is the powerful look of disinterest she has plastered upon her face.<br><</linkreplace>><br>
+[[Uhhh.... who are you?|jamieWho]]<br>
+[[What are these papers?|jamieWhat]]<br>
+[[Why do you look so... disinterested?|jamieWhy]]<br><br>
+
+<<set $npcFlags.jamie++>><i>Your relationship with this person has begun!</i>
+<<work [[Okay, can do!|workEndOfDay]] 240 6>>
+<<else>>
+<i> This hasn't been written yet!</i><br>
+<<work [[workEndOfDay]] 240 3>>
+<</if>>
+:: jamieWho [nobr]
+
+You ask as nicely as you can who this individual who so brazenly approached your desk demanding your attention actually is. Though your question seems to confuse the woman as she raises in a brow. <<nm "jamie" "I'm Jamie. Now can you please just start working on these?">> She says with almost a pleading motion.<br><br>
+
+[[What are these papers?|jamieWhat]]<br>
+[[Why do you look so... disinterested?|jamieWhy]]<br>
+<<work [[Okay, can do!|workEndOfDay]] 240 6>>
+
+:: jamieWhat [nobr]
+You motion towards the papers as you attempt to inquire what these physical forms actually are and instead get an annoyed huff. <<nm "jamie" "Just... papers that need to be digitized, is that not... like, your job?">> She asks. <br><br>
+
+[[Yes.|jamieYes]]<br>
+[[No.|jamieNo]]<br>
+[[I don't know.|jamieIDK]]<br>
+
+:: jamieWhy [nobr]
+
+Disregarding any niceties, you straight up ask the girl why she looks so disinterested in everything. Your question seems to take her off guard, as she looks both shocked and irritated. <<nm "jamie" "Well... I... I just don't want to... I mean, you work here! I...">> The woman sputters, seemingly at a loss for words.<br><br>
+
+<<nm "jamie" "I- Can you just please deal with these papers?">> Jamie says as she finally collects herself. <br><br>
+
+[[What are these papers?|jamieWhat]]<br>
+<<work [[Okay, can do!|workEndOfDay]] 240 6>><br><br>
+<i>Relationship with Jamie increased by one point!</i> <<set $npcFlags.jamie++>>
+:: jamieYes [nobr]
+
+<<nm "jamie" "Great. Then why are we even arguing? Please just get them figured out or Phil will have both of our asses.">>
+
+<<work [[Okay!|workEndOfDay]] 240 6>>
+
+:: jamieNo [nobr]
+<<nm "jamie" "W- What? But I thought that's why Phil... wait, what did you say your name was again?">> Jamie asks, seemingly entirely caught off guard.<br><br>
+
+You explain to Jamie that you didn't say what your name was, and that it is <<kara>>. <br><br>
+
+<<nm "jamie" "Oh... oh shit. I- I gotta go...">> Jamie's face falls pale as she speaks, realizing that she must have messed up in some way before rushing off down the hallway. You don't see where she goes.<br><br>
+
+<<work [[Huh, weird.|workEndOfDay]] 240 3>><br><br>
+
+<i>Relationship with Jamie has gone up by one point!</i><<set $npcFlags.jamie++>>
+
+:: jamieIDK [nobr]
+
+<<nm "jamie" "What do you mean you don't know? Didn't they tell you that you were supposed to do?">> Jamie seems annoyed that you even dared to say anything at all. <<nm "jamie" "Like, don't they give you like a job description?">><br><br>
+
+You nod, saying that you were told what you were supposed to do, but it was kind of vague. You are some kind of data muncher who turns spreadsheets into readable documents.
+
+<<nm "jamie" "What?">> Jamie's eyes lock with you as you say that, her head tilted in confusion. <br><br>
+
+You explain what you just said. That Phil told you that you were some kind of data compiler. <br><br>
+
+<<nm "jamie" "W- What did you say your name was again?">> She looks almost scared to hear the response. <br><br>
+
+You explain to Jamie that you didn't say what your name was, and that it is <<kara>>. <br><br>
+
+<<nm "jamie" "Oh... oh shit. I- I gotta go...">> Jamie's face falls pale as she speaks, realizing that she must have messed up in some way before rushing off down the hallway. You don't see where she goes.<br><br>
+
+<<work [[Huh, weird.|workEndOfDay]] 240 3>><br><br>
+:: workFat
+
+<<if $player.fatlevel > 3 && $workFlags.lastWeight == 0>>
+<<elseif $player.fatlevel > 5 && $workFlags.lastWeight == 1>>
+<<elseif $player.fatlevel > 7 && $workFlags.lastWeight == 2>><<goto[[workFat]]>>
+<<elseif $player.fatlevel > 9 && $workFlags.lastWeight == 3>><<goto[[workFat]]>>
+<<elseif $player.fatlevel > 11 && $workFlags.lastWeight == 4>><<goto[[workFat]]>>
+<</if>>
+[[Get to work...|workJob]]
 :: workDonut [nobr]
 
 Murmurs of someone bringing donuts of some variety are whispered through the cubicles. You crane your head in curiosity, yet from where you sit you have no view of the break room. <br><br>
@@ -39,8 +135,13 @@ Murmurs of someone bringing donuts of some variety are whispered through the cub
 Do you stand up to investigate? <br><br>
 
 [[Yes|workDonutYes]]<br>
-[[No|workDonutNo]]
+<<if $player.gluttony < 5>>[[No|workDonutNo]]<<else>><i>The idea of donuts is simply too good for you to turn down...</i><</if>>
 
+:: workDonutNo [nobr]
+
+You think better of going and eating some donuts. It's probably best for your weight. 
+
+<<work [[Continue working...|workEndOfDay]] 240 3>>
 :: workDonutYes [nobr]
 <<if $player.fatlevel > 4>>
 You hoist yourself up from your desk, prying your bloated behind from the chair and begin to walk over to the break area. Your destination of fatting food making the rubbing of your thighs more apparent in your mind. <br><br>
@@ -129,7 +230,7 @@ What do you do? <br><br>
     <</if>>
 <br>
 
-<<if $player.gluttony < 3>>[[Leave|WorkEndOfDay]]<</if>>
+<<if $player.gluttony < 3 || $player.fullness >= $player.maxFullness/2>><<work [[Leave|workEndOfDay]] 240 3>><</if>>
 :: workIntro [nobr]
 "Van Papers"<br><br>
 
@@ -238,4 +339,15 @@ So basically, everytime you go to work you'll be 'tested' mechanically against a
 
 If all of those are good, you'll do good! If one of those is bad, you'll do okay, if more than one of those are bad... Well, maybe you'll run into some problems.</i><br><br>
 
-<<link "continue">><<goto [[workJob]]>><</link>>
+<<link "continue">><<goto [[workJob]]>><<set $firstTime.work = false>><</link>>
+
+:: workEndOfDay [nobr]
+It's the end of the day! Is there anything you'd like to do before you leave?<br><br>
+
+<<if $npcFlags.jamie > 0>>[[Go talk to Jamie?|workJamieTalk]]<br><</if>>
+<<if $npcFlags.ryan > 0>>[[Go talk with Ryan?|workRyanTalk]]<br><</if>>
+<<if $npcFlags.phil > 0>>[[Go talk with Phil?|workPhilTalk]]<br><</if>>
+<<if $npcFlags.gary > 0>>[[Go talk with Gary?|workGaryTalk]]<br><</if>>
+<<if $npcFlags.sarah > 0>>[[Go talk with Sarah?|workSarahTalk]]<br><</if>>
+
+<<work [[Finish up for the day...|townHub]] 240 3>>

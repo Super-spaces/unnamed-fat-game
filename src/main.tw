@@ -16,7 +16,7 @@
 Unnamed Life Simulator
 
 :: Start {"position":"1000,600"}
-Welcome to <b>Unnamed Life Simulator</b>! 
+Welcome to <b>Unnamed Life Simulator</b>! <i>Version 0.0.4 "The beginnings of the work update"</i>
 
 This is a primarily weight gain focused text game that puts you the shoes of a (currently) female protaganist who is down on their luck and is given the chance to get back on their feet! Though it may be that this "chance" is far too good to be true.
 
@@ -28,7 +28,7 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
 
 [[Skip Intro|houseHub]]
 
-[[Testing]]
+/*[[Testing]]*/
 :: Testing {"position":"1150,600"}
 <<set _timetest = 1000>>
 <<timeLegible _timetest>>
@@ -44,15 +44,7 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
 <<work [[1 Hour of Extreme Work|Testing]] 60 9>>
 <<button [[toEat]]>><<set $foodItem = $testSlime >><</button>>
 
-<<link [[houseHub]]>><<set $firstTime ={
-work: true,
-supermarket: true,
-bathroom: true,
-bedroom: true,
-kitchen: true,
-townhub: true,
-park: true,
-}>><</link>>
+[[houseHub]]
 <<link "set aware">><<set $flags.isAware = 1>><</link>>
 :: toEat {"position":"1500,1200"}
 <<toEat>>

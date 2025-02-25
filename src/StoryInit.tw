@@ -1,6 +1,15 @@
 :: StoryInit {"position":"1825,600"}
 <<include [[foodSet]]>>
 /*imperal vs metric */
+<<set $firstTime ={
+work: true,
+supermarket: true,
+bathroom: true,
+bedroom: true,
+kitchen: true,
+townhub: true,
+park: true,
+}>>
 <<set $option ={
 measurements: true, /*imperial false, metric true */
 }>>
@@ -36,6 +45,15 @@ gluttony: 0, /*0-10 has a change to increase when eating large amounts of food, 
 money: 0,   
 confidence: 0,
 }>>
+<<set $npcFlags ={
+jamie: 0,
+phil: 1,
+gary: 0,
+jock: 0,
+ryan: 1,
+sarah: 0,
+CEO: 0,
+}>>
 <<set $flags ={
 isAware: 0,
 houseClean: 0, /* 0-10 WIP */
@@ -48,6 +66,9 @@ needSleep: false,
 sinceWorkout: 0,
 hasPhone: false,
 lastWeighed: 0,
+}>>
+<<set $workFlags ={
+lastWeight: 0,
 }>>
 <<set $playervar ={
 name: "Kara",
