@@ -70,7 +70,7 @@ Money: $<<= $player.money>><br>
     <<elseif $player.lust >= 90 and $player.lust < 100>>Necessary
 <</if>>
 <hr>
-<<if $flags.sweat == true>><div class="sweat"><<hovertip "<b>Sweating</b><hr>You are sweating!">>💦<</hovertip>></div><</if>>
+<<if $player.sweat >= 1>><div class="sweat"><<hovertip "<b>Sweating</b><hr>You are sweating!">>💦<</hovertip>></div><</if>>
 <<if $player.hunger < 300>><div class="hungry"><<hovertip "<b>Hungry</b><hr>You are Hungry!">>🍴<</hovertip>></div><</if>>
 /*<<if $player.lust > 70>><div class="horny"><<hovertip "<b>Horny</b><hr>You are horny!">>💗<</hovertip>></div><</if>>
 <<if $player.fatigue > 60>><div class="sleepy"><<hovertip "<b>Tired</b><hr>You are tired!">>💤<</hovertip>></div><</if>>*/

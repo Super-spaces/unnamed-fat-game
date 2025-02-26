@@ -44,6 +44,7 @@ fatigue: 0, /*0-100 increases dramatically at heigher weights due to walking */
 gluttony: 0, /*0-10 has a change to increase when eating large amounts of food, or eating while full. */
 money: 0,   
 confidence: 0,
+sweat: 0,
 }>>
 <<set $npcFlags ={
 jamie: 0,
@@ -59,13 +60,15 @@ isAware: 0,
 houseClean: 0, /* 0-10 WIP */
 transport: 0, /*0 walking, 1 bike, 2 car, 3 carpool (Uber can be done at any time to save time and energy.) */
 friendDrive: false,
-sweat: 0,
+sweat: false,
+slob: false,
 lateWork: 0, /*0 early, 1 on time, 2 late */
 lastSlept: 0,
 needSleep: false,
 sinceWorkout: 0,
 hasPhone: false,
 lastWeighed: 0,
+houseExp: false,
 }>>
 <<set $workFlags ={
 lastWeight: 0,
@@ -85,3 +88,4 @@ method: 0,
 location: 0,
 distance: 0,
 }>>
+

@@ -15,19 +15,23 @@
 :: StoryTitle {"position":"1625,600"}
 Unnamed Life Simulator
 
-:: Start {"position":"1000,600"}
-Welcome to <b>Unnamed Life Simulator</b>! <i>Version 0.0.4 "The beginnings of the work update"</i>
+:: Start [nobr] {"position":"1000,600"}
+<h6><i>Version 0.0.4 "The beginnings of the work update"</i></h6>
+Welcome to <b>Unnamed Life Simulator</b>!<br><br>
 
-This is a primarily weight gain focused text game that puts you the shoes of a (currently) female protaganist who is down on their luck and is given the chance to get back on their feet! Though it may be that this "chance" is far too good to be true.
+This is a primarily weight gain focused text game that puts you the shoes of a (currently) female protaganist who is down on their luck and is given the chance to get back on their feet! Though it may be that this "chance" is far too good to be true.<br><br>
 
-The entire story is presented through the perspective of this character in the second person. This means that any information that your character wouldn't know, you aren't going to know. For example, your weight as a number, the way your feet look when you're belly is too big to see past. Stuff like that. 
+The entire story is presented through the perspective of this character in the second person. This means that any information that your character wouldn't know, you aren't going to know. For example, your weight as a number, the way your feet look when you're belly is too big to see past. Stuff like that. <br><br>
 
-Anyway, the game is currently in Pre-Alpha! As always that means that anything you see here is subject to change and the only content put in place is the barebone framework of the main gameplay loop. Lore, relationships, and most of the twists have not been implemented and this version of the game is purely for testing purposes. Have fun!
+Anyway, the game is currently in Pre-Alpha! As always that means that anything you see here is subject to change and the only content put in place is the barebone framework of the main gameplay loop. Lore, relationships, and most of the twists have not been implemented and this version of the game is purely for testing purposes. Have fun!<br><br>
 
-[[Begin|gameStart]]
+[[Begin|gameStart]]<br><br>
 
-[[Skip Intro|houseHub]]
+[[Skip Intro|houseHub]]<br><br>
 
+<hr>Flags<br>
+<<if $flags.sweat == false>><<link 'Enable Sweat'>><<set $flags.sweat = true>><<goto 'Start'>><</link>><<else>><<link 'Disable Sweat'>><<set $flags.sweat = false>><<goto 'Start'>><</link>><</if>><br>
+<<if $flags.slob == false>><<link 'Enable Slob'>><<set $flags.slob = true>><<goto 'Start'>><</link>><<else>><<link 'Disable Slob'>><<set $flags.slob = false>><<goto 'Start'>><</link>><</if>>
 /*[[Testing]]*/
 :: Testing {"position":"1150,600"}
 <<set _timetest = 1000>>
@@ -42,7 +46,8 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
 <<work [[1 Hour of Medium Work|Testing]] 60 3>>
 <<work [[1 Hour of Hard Work|Testing]] 60 5>>
 <<work [[1 Hour of Extreme Work|Testing]] 60 9>>
-<<button [[toEat]]>><<set $foodItem = $testSlime >><</button>>
+
+<<link [[Eat some highly fattening slime.|toEat]]>><<set $foodItem = $testSlime >><</link>>
 
 [[houseHub]]
 <<link "set aware">><<set $flags.isAware = 1>><</link>>
@@ -129,7 +134,11 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
 You take a moment to look down at yourself. <i>WIP</i> <br><br>
 
 <<switch $player.fatlevel>>
-<<case 2>>A semi skinny woman. 
+<<case 2>>You look down towards yourself, and from a glance you see you are a young woman of a healthy weight with no features of note. 
+<<case 3>>You look down towards yourself, and you see that your body has grown a bit fat all over. Your breasts are rather large and your gut is a fat dome upon your body, your butt sticks out a good bit more than before.
+<<case 4>>You look down towards yourself, and you realize that if you keep gaining weight, you'll soon see even less of yourself. Your breasts sit upon your fat stomach which sticks out a good foot from your chest, while your wide ass is like two watermelons behind you. You can barely see your legs, and you cannot see your crotch without a reflection.
+<<case 5>>You look down towards yourself, feeling your chin fold in on itself as your double chin gets in your way. You can only really see your large growing apron of a stomach, and your expanding two seat ass. Out of curiousity you look around to make sure no one is looking before grabbing the edges of your stomach, lifting it up and then dropping it. The feeling of it sloshing and jiggling is weirdly cathartic. 
+<<case 6>>
 <</switch>>
 <</if>>
 <br><br><<return>>

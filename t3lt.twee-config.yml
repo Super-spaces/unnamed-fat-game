@@ -25,3 +25,5 @@ sugarcube-2:
       name: timeLegible
     kara:
       name: kara
+    sweat:
+      name: sweat

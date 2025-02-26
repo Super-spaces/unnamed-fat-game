@@ -6,7 +6,7 @@
 <<set $testSlime ={
 name: "testSlime",
 fullness: 50,
-gainRate: 1000,
+gainRate: 250,
 digestRate: 1, 
 toEat: "You eat the test slime, it's slimy, and testy. It goes down surprisingly well, all things considered. You feel a little bit more full.",
 hunger: 500,

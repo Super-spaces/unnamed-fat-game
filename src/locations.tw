@@ -1,6 +1,8 @@
-:: houseHub {"position":"1000,1050"}
-<<nobr>><<set $gamestart = true>>
-You stand in the middle of your house... <br><br>
+:: houseHub [nobr] {"position":"1000,1050"}
+<<set $gamestart = true>>
+<<if $player.fatlevel < 7>>You stand in the middle of your house...
+<<elseif $player.fatlevel >= 7>>You stumble into the middle of your house, desperately trying to catch your breath as you feel the momentum of your lard shifting back and forth which every microstep you take. Between deep wheezes, you look around your room. 
+<</if>><br><br>
 
 A kitchen that sits off to the right, a living room further into the room itself, a door to your right leading to your bedroom, and a door to your left revealing a bathroom. <br><br>
 
@@ -9,69 +11,91 @@ A kitchen that sits off to the right, a living room further into the room itself
 <<case 0>>Currently your house is spotless, with barely even a speck of dust upon the ground.
 <</switch>><br><br>
 
-<<move [[Bathroom]] 1>><br>
+<<if $player.fatlevel >= 9 && $flags.houseExp == false>><<move [[Bathroom|bathroomStuck]] 10>> <i>You give a nervous glance towards the door, are you sure you'll fit?</i><br><<else>><<move [[Bathroom]] 1>><br><</if>>
 <<move [[Bedroom]] 1>><br>
 <<move [[Kitchen]] 1>><br><br>
 <<move [[Leave the House|preTownHub]] 3>><br>
 
 
 [[Testing]]<br>
-<</nobr>>
-:: Bathroom {"position":"800,1050"}
-<<nobr>>
+
+:: bathroomStuck [nobr]
+
+You attempt to cram your massive lard bloated body through the much smaller doorframe that is before you. You can see the bathroom in front of you, the shower, the toilet, so tantalizing close. You take a labored micro step forward, feeling everything on your body slosh back and forth with the movement, your deep wheezing breathes echoing through the house, and immediately feel yourself slam against the tight doorframe. Your body jostles with the impact, like a massive pile of jello. You try again to take another step forward, but foot pushes you no further in, instead your body just sloshes against the door tauntingly.<br><br>
+
+[[Give up?|bathroomLeave]]<br>
+[[Keep trying.|bathroomStubborn]]
+
+:: bathroomLeave [nobr]
+
+You push against the doorframe with your arms, feeling your bloated body pop out of the socket with a wet and load 'POP', causing you to stumble back and barely catch yourself on the back wall. Your heavy body slaming into it hard enough to leave a now noticable dent in the drywall. <br><br>
+
+<<move [[Well, Shit.|houseHub]] 20>>
+
+:: bathroomStubborn [nobr]
+
+You stubbornly push yourself further into the doorframe, trying and failing to find any grip against the tile floor below you. <<sweat "You can hear the copious amounts of sweat pouring off your body and falling against the ground, like a salty rain.">> Every step brings more movement, though no more progress into the bathroom. <br><br>
+
+The room before you sits motionless, as if to taunt you with how easy you once entered this room. You feel so close, it's just right there. Yet no matter how hard you try, your body pushes against the doorframe too much. You can feel the pressure and friction against your sides preventing you from going anyfurther. You know that if you keep trying you will be well and truly stuck with no way out. <br><br>
+
+<<move [[Well, Shit.|houseHub]] 45>>
+:: Bathroom [nobr] {"position":"800,1050"}
 <<if $firstTime.bathroom == true>>
     
 You enter your bathroom for the first time, it's not that large of a room, though plenty spacious for your skinny self. You see decently sized walk in shower, along with a sink and a toilet.<br><br>
 <<unset $firstTime.bathroom>>
 <<else>>
-You enter your bathroom, you see decently sized walk in shower, along with a sink and a toilet.<br><br>
+<<if $player.fatlevel < 3>>You enter your bathroom, you see decently sized walk in shower, along with a sink and a toilet.
+<<elseif $player.fatlevel <= 5>>You step into the bathroom, giving a worrying look down towards how close your body is to the sides of the door. You see a decently sized walk in shower, along with a sink and toilet.
+<<elseif $player.fatlevel < 7>>You step into the bathroom, you give a worrying look as you feel the sides of your body graze against the frame of the door. Thankfully you aren't anywhere near stuck, but you may be soon if you don't slow down. As you move past the door you see a decently sized walk in shower, along with a sink and toilet. 
+<<elseif $player.fatlevel < 9>>As you attempt to enter the bathroom, you give a groan as you feel your sides, which once only grazed the door, now sit firmly stuck against the sides of the door. Fat spills out from both sides as you try in vain to push yourself through, your whole form jiggling and sloshing with the momentum. Your wheezing breaths echo through the house as you try anything, yet with every movement you feel yourself budge just a bit, before you stumble forward finally free.<br><br> <<sweat "You feel sweat drip down your body and onto the floor as it coats your clothing and slides between your folds and rolls. ">>
+<</if>>
+<br><br>
     
     
 <</if>>
 
-<<if $player.fatlevel < 5>> 
-<<move [[Step onto Scale|Scale]] 5>><br>
-<<move [[Step into Shower|Shower]] 5>><br><br>
+<<if $player.fatlevel < 7>> 
+<<move [[Step onto Scale|Scale]] 1>><br>
+<<move [[Step into Shower|Shower]] 1>><br><br>
 <<elseif $player.fatlevel <= 9>>
-<<move [[Waddle onto Scale|Scale]] 5>><br>
-<<move [[Waddle into Shower|Shower]] 5>><br><br>
+<<move [[Waddle onto Scale|Scale]] 3>><br>
+<i>You're too fat for the shower!</i><br><br>
 <<else>>
-<<move [[Step onto Scale|Scale]] 5>><br>
+<<move [[Waddle onto Scale|Scale]] 5>><br>
 You do not fit in the shower!<br><br>
 <</if>>
 <<move [[Back|houseHub]] 1>>
 
 
-<</nobr>>
-:: Shower
-<<nobr>>
+:: Shower [nobr]
 <<switch $player.fatlevel>>
-    <<case 1>>You're a skinny bitch! <br><br>
-    <<case 2>>You're less of a skinny bitch and the water does water things.<br><br>
-    <<case 3>>You're starting to get rolls but you still can reach your back.<br><br>
-    <<case 4>>it's starting to get harder to reach certain places. <br><br>
-    <<case 5>>it's definitely getting harder to reach places. <br><br>
-    <<case 6>>you're having to make sure to rinse and dry all of your rolls. The shower door scrapes your sides as you walk in, you barely fit without touching the sides.<br><br>
-    <<case 7>>You are having to start to think about how you enter the shower, and the water does not feel like it's getting all the parts of your body. <br><br>
-    <<case 8>>It's getting exhausting just standing in the shower. You barely fit through the door, and there is a part of your body touching the sides at all time. <br><br>
-    <<case 9>>You're sweating more liquid than the water hitting your body. You are almost certain you've missed a bunch of spots as a part of you touches every side of the shower.<br><br>
+    <<case 1>>You take a quick shower. Stepping in, with how desperately skinny your body is you are able to easily reach everything and don't feel as if you miss a spot! <br><br><<move [[Back|Bathroom]] 10>>
+    <<case 2>>You take a quick shower. Stepping in, with how skinny your body is you are able to easily reach everything and don't feel as if you miss a spot!<br><br><<move [[Back|Bathroom]] 10>>
+    <<case 3>>You take a quick shower. Stepping in, it's a little bit weird to have to clean under the few folds you have on your body, but it doesn't take long and you don't have any issues reaching them.<br><br><<move [[Back|Bathroom]] 10>>
+    <<case 4>>You take a quick shower. Stepping in, you have to be extra careful to clean all of the different places on your body where you skin comes in contact with itself, it's a bit concerning how many different places there are. <br><br><<move [[Back|Bathroom]] 15>>
+    <<case 5>>You take a relatively quick shower. Waddling in, there are starting to be more places for you to wash then you can keep track of. It feels like every day there is a new place that you have to rinse or soap up. You've got rolls underneath your butt, underneath your arms, of course under your belly, it's a bit excessive. <br><br><<move [[Back|Bathroom]] 20>>
+    <<case 6>>You attempt to take a quick shower, but find out rather rapidly that isn't really a thing anymore. Almost every single part of your body now has it's own little roll or small fold. A new place for you to wash. Not to mention the dwindling space with how wide you are.<br><br><<move [[Back|Bathroom]] 25>>
+    <<case 7>>You take a long shower out of necessity, seeing as getting through the door is now a time taking task in itself. Every area of your body has some different place that you have to lift up and rinse with a sponge. It's a incredibly strange feeling to have to lift up the side of your stomach to wash your leg, or the fat above your ass. Though it's a bit worrying how difficult it is starting to get to reach certain places, or how a part of your body is always touching some side of the shower.<br><br><<move [[Back|Bathroom]] 30>>
+    <<case 8>>You attempt to take a shower, though you find that you barely fit in the stall. Both sides of your body sit pressed up tightly against the walls as you haphazardly try to wash yourself, though it's physically not possible to reach anywhere important. <br><br> <i>Maybe you should find somebody to help?</i><br><br><<move [[Back|Bathroom]] 1>>
+    <<case 9>>You attempt to take a shower, but as you try your best to cram your bloated body past the suddenly thin shower door you find that no matter how hard you jiggle or slosh your body you cannot get yourself into the stuipdly small area.<br><br><i>Maybe you should find somebody to help?</i><br><br><<move [[Back|Bathroom]] 25>>
 
 <</switch>>
-<<move [[Back|Bathroom]] 2>>
+<<if $player.fatlevel <8>><<set $player.sweat = 0>><</if>>
 
-<</nobr>>
-:: Scale {"position":"600,1050"}
-You currently weight $display.weight kgs
 
-[[Bathroom]]
+:: Scale [nobr] {"position":"600,1050"}
+You currently weigh $display.weight kgs <br><br>
+
+[[Bathroom]]<br>
 <<set $display.scaleWeight = $display.weight>>
 <<set $flags.lastWeighed = 0>>
 
-:: Bedroom {"position":"900,1200"}
-You enter your bedroom. It's rather sparse at the moment, a strange painting of a flower sits off in the corner next to the shaded window in the center of the wall. You're bed sits in the center of the room, as you left it in the morning. To your right there is your mirror. 
+:: Bedroom [nobr] {"position":"900,1200"} 
 
+You enter your bedroom. It's rather sparse at the moment, a strange painting of a flower sits off in the corner next to the shaded window in the center of the wall. You're bed sits in the center of the room, as you left it in the morning. To your right there is your mirror. <br><br>
 
-[[Sleep?|Bed]]
+[[Sleep?|Bed]]<br>
 [[Mirror]] 
 
 <<move [[Back|houseHub]] 1>>
