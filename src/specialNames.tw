@@ -1,4 +1,20 @@
 :: PassageHeader [nobr] {"position":"1725,600"}
+/* event system */
+<<if $player.sweat >= 1 && $timer.sweat == 0>><<silent>><<= $events.push(7)>><<set $timer.sweat = 4>><</silent>><<elseif $timer.sweat > 0>><<set $timer.sweat-->><</if>>
+<<if $player.hunger < 300 && $timer.hunger == 0>><<silent>><<= $events.push(0)>><<set $timer.hunger = 4>><</silent>><<elseif $timer.hunger > 0>><<set $timer.hunger-->><</if>>
+<<if $player.stuffed == true && $timer.stuffed == 0>><<silent>><<= $events.push (1)>><<set $timer.stuffed = 4>><</silent>><<elseif $timer.stuffed > 0>><<set $timer.stuffed-->><</if>>
+<<set _test = $events.pluck()>>
+<<switch _test>>
+<<case 0>><<dn "stomachStatus" " 🍗 Your stomach rumbles... 🍗">>
+<<case 1>><<dn "stomachStatus" "Your stomach gurgles...">>
+<<case 2>>2
+<<case 3>>3
+<<case 4>>4
+<<case 5>>5
+<<case 6>>6
+<<case 7>><<dn "sweatStatus" " 💦 You're covered in sweat... 💦">>
+<</switch>>
+<<silent>><<=$events.deleteFirst(_test)>><</silent>>
 <<nobr>><<silently>>
 /*random numbers  */
 <<set $rand = random(1,10)>>
@@ -23,6 +39,12 @@
 <<set $display.fullness = "Null">>
 <</if>>
 <</silently>><hr><br><</nobr>>
+/*Flag creator */
+<<if $player.fullness >= $player.maxFullness*.80>>
+<<set $player.stuffed = true>>
+<<else>>
+<<set $player.stuffed = false>>
+<</if>>
 :: PassageFooter [nobr]
 <br><br><br><hr>
 <<if $flags.lastSlept > 86400>>
@@ -35,7 +57,8 @@
 <</if>>
 /*Inspect self icon, + prevention of soft lock with the temp variable. */
 <<if _inInspect == true>><<else>>[[Inspect Yourself|lookSelf]]<</if>>
-:: StoryCaption {"position":"1725,700"}
+:: StoryCaption [nobr] {"position":"1725,700"}
+$version
 <<if $gamestart == true>><<nobr>><<timeMachine>><<bmicalc>><<weightadj>>/*<<cleanadj>>*/
 ''_hour:_minute _AMPM'' | $currentday.dowst<br>
 Day: ''$currentday.day''<hr>
@@ -72,6 +95,7 @@ Money: $<<= $player.money>><br>
 <hr>
 <<if $player.sweat >= 1>><div class="sweat"><<hovertip "<b>Sweating</b><hr>You are sweating!">>💦<</hovertip>></div><</if>>
 <<if $player.hunger < 300>><div class="hungry"><<hovertip "<b>Hungry</b><hr>You are Hungry!">>🍴<</hovertip>></div><</if>>
+<<if $player.stuffed == true>><div class="stuffed"><<hovertip "<b>Stuffed</b><hr>You are Stuffed!">>😮‍💨<</hovertip>></div><</if>>
 /*<<if $player.lust > 70>><div class="horny"><<hovertip "<b>Horny</b><hr>You are horny!">>💗<</hovertip>></div><</if>>
 <<if $player.fatigue > 60>><div class="sleepy"><<hovertip "<b>Tired</b><hr>You are tired!">>💤<</hovertip>></div><</if>>*/
 <</nobr>>

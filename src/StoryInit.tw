@@ -1,9 +1,20 @@
 :: StoryInit {"position":"1825,600"}
+<<set $events = []>>
+<<set $timer = {
+    hunger: 0,
+    sweat: 0,
+    stuffed: 0,
+    weight: 0,    
+}>>
+<<set $version = '<h6><i>Version 0.1.0 "Content Update"</i></h6>'>>
+
+
+
 <<include [[foodSet]]>>
 /*imperal vs metric */
 <<set $firstTime ={
 work: true,
-supermarket: true,
+store: true,
 bathroom: true,
 bedroom: true,
 kitchen: true,
@@ -12,6 +23,7 @@ park: true,
 }>>
 <<set $option ={
 measurements: true, /*imperial false, metric true */
+dev: false,
 }>>
 /*time options */
 <<set $food ={
@@ -23,7 +35,7 @@ time: 32400,
 hour : 0, 
 minute : 0,
 weather: 0,
-dayofweek: 6,
+dayofweek: 7,
 temp: 17,
 dowst: "",
 day: 0,
@@ -36,15 +48,16 @@ fullness: 0, /* Range 1-100; 100 is normal human fullness */
 maxFullness: 100,
 weight: 61300,  /* in grams */
 gainRate: 0, /* possible variable to be used */
-str: 0, /* 1-100 increases by 5 on successful workout attempts, decreases by 5 after 3 days of no activity. */
+str: 20, /* 1-100 increases by 5 on successful workout attempts, decreases by 5 after 3 days of no activity. */
 digestRate: 1,
 height: 175,
 hunger: 400,
 fatigue: 0, /*0-100 increases dramatically at heigher weights due to walking */
 gluttony: 0, /*0-10 has a change to increase when eating large amounts of food, or eating while full. */
-money: 0,   
+money: 250,   
 confidence: 0,
-sweat: 0,
+sweat: 0, /*0 the player isn't sweating 1 the player is sweating */
+stuffed: false,
 }>>
 <<set $npcFlags ={
 jamie: 0,
@@ -72,6 +85,10 @@ houseExp: false,
 }>>
 <<set $workFlags ={
 lastWeight: 0,
+effort: 0, /*0 = lowest effort | 1 = laid back | 2 = normal | 3 = working hard */
+infrac: 0,
+chairBreak: false,
+daysWorked: 0,
 }>>
 <<set $playervar ={
 name: "Kara",

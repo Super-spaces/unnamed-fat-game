@@ -1,4 +1,29 @@
 /* Characters */ 
+.stomachStatus {
+	color: black;
+	font-style: italic;
+	background-color: darkorange
+}
+.sweatStatus {
+	color: black;
+	font-style: italic;
+	background-color: cyan
+}
+.bad {
+	color: red
+}
+.notgood {
+	color: orange
+}
+.good {
+	color: green
+}
+
+.dev {
+	color: #0c0;
+	font-family: Courier New;
+	font-size: 9pt;
+}
 .Sharyl {
 	color:brown
 
@@ -135,6 +160,16 @@
     display: inline-block; 
     vertical-align: top;
     background-color: rgb(67, 33, 4);
+    text-align: center;
+  }
+  .stuffed { 
+
+    border: 5pt outset rgb(255, 102, 0);
+    border-radius: 10pt;
+    width: 20pt;
+    display: inline-block; 
+    vertical-align: top;
+    background-color: rgb(70, 28, 0);
     text-align: center;
   }
   .sleepy { 

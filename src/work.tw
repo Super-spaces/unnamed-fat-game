@@ -3,15 +3,15 @@
 <<set $workDifficulty = 1>>
 <<if $currentday.dayofweek == 0 || $currentday.dayofweek == 6>>You come into work on a weekend...<br><br>[[Leave|preTownHub]]<<elseif $timedata.hour < 5 || $timedata.hour >= 17>>You arrive at work afterhours...<br><br>[[Leave|preTownHub]]<<else>>
 <<if $firstTime.work == true>><<goto workIntro>><</if>>
-<<if $player.fatlevel > 3>>
+<<if $player.fatlevel < 3>>
 You push open the doors to Van Papers and are intricatly aware of all of the weight that now sits upon your frame. The way your clothes now hang tight against your skin, or the few new rolls that sit creasing your clothing and making your recent actions far more obvious. 
-<<elseif $player.fatlevel > 5>>
+<<elseif $player.fatlevel < 5>>
 You push open the door to Van Papers, the short walk to the front of the building taking more out of you then you remember. Your mind now on the topic, you feel the jiggling, the rubbing, the shifting of all this new weight upon your body. All of this new weight changing everything, and attracting far more unwanted attention before as people watch you waddle your way to whatever your next destination will be. 
-<<elseif $player.fatlevel > 7>>
+<<elseif $player.fatlevel < 7>>
 You give a weighty huff as you shove open the door to Van Papers, the short walk to the front of the building leaving you breathless you crave the sanctity of your desk. You know without even looking that almost every part of you is wobbling and shifting with every shift of your leg. Which of course each step you take is far more effort then it ever should be. You can feel the sweat beading at your brow as the effort of just moving your fat ass is taking everything you have. 
-<<elseif $player.fatlevel > 9>>
+<<elseif $player.fatlevel < 9>>
 You give a pained wheeze as someone holds the door open for you at Van Papers, the short walk feels more like a mile long trek with your short fat hampered steps. Each one causing your leg to slam into the back of your apron like belly. Sweat liberally pours down your head and coats all of the little crevices your many rolls create. You crave the sanctity of your desk more than anything, at least until you have to make this walk all over again in eight hours. 
-<<elseif $player.fatlevel > 11>>
+<<elseif $player.fatlevel < 11>>
 <</if>>
 You've arrived at work 
 <<if $timedata.hour > 5 || $timedata.hour < 7>><<set $flags.lateWork = 0>><</if>>
@@ -23,27 +23,67 @@ You've arrived at work
     <<case 2>><i>late</i>
 <</switch>>
 
-<br><br><<move [[Begin Work|workJob]] 10>>
+<br><br>
+Now at work, How do you plan on working...? (This affects fatigue)<br>
+<<if $player.fatigue <= 50>><<link [[Hard|workJob]]>><<set $workFlags.effort = 4>><<set $tempeffort = 4>><</link>><<else>><i>You're too tired to work hard!</i><</if>><br>
+<<if $player.fatigue <= 75>><<link [[Normally|workJob]]>><<set $workFlags.effort =3>><<set $tempeffort = 2>><</link>><<else>><i>You're too tired to work normally!</i><</if>><br>
+<<if $player.fatigue <= 90>><<link [[Casually|workJob]]>><<set $workFlags.effort =2>><<set $tempeffort = 1>><</link>><<else>><i>You're too tired to work casually!</i><</if>><br>
+<<link [[Barely|workJob]]>><<set $workFlags.effort =1>><<set $tempeffort =0>><</link>><br>
+
 <</if>>
 
 :: workJob [nobr]
 <<if $firstTime.work == true>><<goto [[workIntro]]>><</if>>
-You spin around in your chair quickly and move to get to work. Sorting your incoming documents, going through your emails, getting everything in line as you begin.<br><br>
+<<if $player.gluttony <= 2>>(<<dn "good" "$player.gluttony">> ✅)
+<<elseif $player.gluttony <= 5>>(<<dn "notgood" "$player.gluttony">> 🟧)
+<<elseif $player.gluttony <= 10>>(<<dn "bad" "$player.gluttony">> ❌)<</if>>
+<<if $player.fatlevel - $player.str/10 <= 1>>(<<dn "good" "$player.fatlevel">> ✅) (<<dn "good" "$player.str">> ✅)
+<<elseif $player.fatlevel - $player.str/10 <= 3>>(<<dn "notgood" "$player.fatlevel">> 🟧) (<<dn "notgood" "$player.str">> 🟧)
+<<elseif $player.fatlevel - $player.str/10 <= 10>>(<<dn "bad" "$player.fatlevel">> ❌) (<<dn "bad" "$player.str">> ❌)<</if>>
+(<<dn "notgood" "$player.confidence">> 🤷)
+<<if $player.fatlevel < 3>>
+You spin around in your chair, distinctly feeling the pressure of your sides lightly grinding against the arms of the chair. Sorting your incoming documents, going through your emails, getting everything in line as you begin.
+<<elseif $player.fatlevel < 5>>
+You spin around in your chair, noticing the distinct weight that jiggles on your body as you stop at your desk. Your stomach sitting upon your legs, your backside filling up the entirety of your chair, fully pressing against the chair's arms. You reach forward, now further from the desk to prevent your belly from pushing against the lip, with your thicker hands to sort your incoming documents, go through your emails, and get everything in line.
+<<elseif $player.fatlevel < 7>>
+<<if $workFlags.chairBreak == false>><<goto "chairBreak">><</if>>
+You let yourself fall into your new reinforced chair. The feeling of your sloshing fat moving across the new leather coated surface is a strange and foreign one. Though the space you now have between the the arms and your sides is very welcome. How long will it last? You press your stomach up against the desk to be able to reach your tools of the trade, and groan as they now feel farther and farther away. 
+<<elseif $player.fatlevel < 9>>
+Your exhausted wheezing fills the space as you waddle to your chair. Reinforced and well protected against your unending enormity. Just seeing it reminds you of how far you've gained. You can feel your legs pressing heavily into each other, fat spilling out between, which each step, despite how far apart they now where. You can feel your wobbling wall of belly sitting a good foot and a half in front of you, the bottom of which peaking out beneath your ill fitting shirt. Your arms, which sit splayed out upon your sides, weakly grasp at the air, as if able to pull yourself further. You can feel the folds of your stomach, of you backside, of your arms and everything inbetween rubbing against each other which each step. <br><br><<sweat "Sweat poors endlessly from your exhaustion, coating your body and lubricating every crevice upon your body.">><br><br>
+
+You approach your rebuilt chair and do your best to aim towards it, though you couldn't see behind you even if you tried, your constant binging has removed your ability to look behind you. With a bit of faith, you try to slowly descend upon the chair, only to fall in a huff against it. You do your best to sit still for a moment, worried at your actions, though your body doesn't cooporaite as it jiggles inssesantly from the excess movement. The chair creaks and cracks, but holds firm. You, had you not been wheezing from exhaustion, would have breathed a sigh of relief as you then attempt to pull yourself towards your desk and haphazardly attempt to your job. Though your bloated stomach and sausage fingers do their best to get in your way.
+<<elseif $player.fatlevel < 11>>
+<<else>>
+You spin around in your chair quickly and move to get to work. Sorting your incoming documents, going through your emails, getting everything in line as you begin.<</if>><br><br>
 /* Get to work, run into event, then give player options to do next thing. */
 <<switch $rand>>
-    <<case 1>>But as you begin, you begin to hear voices in your office... murmurs of... [[Donuts?|workDonut]]
-    <<case 2>>But as you begin, someone stops to give you [[a visit...|workJamie]]
-    <<case 3>>But as you begin, someone stops to give you [[a visit...|workSarah]]
-    <<case 4>>But as you begin, you here some commotion in [[the break room|workVending]]
-    <<case 5>><<work [[Continue...|workEndOfDay]] 240 3>>
-    <<case 6>><<work [[Continue...|workEndOfDay]] 240 3>>
-    <<case 7>>But as you begin, someone stops to give you [[a visit...|workPhil]]
-    <<case 8>><<work [[Continue...|workEndOfDay]] 240 3>>
-    <<case 9>><<work [[Continue...|workEndOfDay]] 240 3>>
-    <<case 10>><<work [[Continue...|workEndOfDay]] 240 3>>
+    <<case 1>>But as you work, you begin to hear voices in your office... murmurs of... [[Donuts?|workDonut]]
+    <<case 2>>But as you work, someone stops to give you [[a visit...|workJamie]]
+    <<case 3>>But as you work, someone stops to give you [[a visit...|workSarah]]
+    <<case 4>>But as you work, you here some commotion in [[the break room|workVending]]
+    <<case 5>><<work [[Continue...|workLunch]] 240 $tempeffort>>
+    <<case 6>><<work [[Continue...|workLunch]] 240 $tempeffort>>
+    <<case 7>>But as you work, someone stops to give you [[a visit...|workPhil]]
+    <<case 8>><<work [[Continue...|workLunch]] 240 $tempeffort>>
+    <<case 9>><<work [[Continue...|workLunch]] 240 $tempeffort>>
+    <<case 10>><<work [[Continue...|workLunch]] 240 $tempeffort>>
 <</switch>><br><br>
 <<link "Debug refresh">><<goto [[workJob]]>><</link>>
 
+:: chairBreak [nobr]
+<<set $workFlags.chairBreak = true>>
+You groan as you waddle to your desk, taking a few moments to line your body up with the far too small chair that sits before you. Not being able to see past your drooping apron of a stomach, (itself threatening to peak out beneath your blanket shirt) or past your wide backside. You guess you sit above the chair, and slowly attempt to lower your weight while holding on to your desk.<br><br>
+
+You feel your ass grind against the arm rests on this far too small chair as you descend, your fat filling out and squeezing against the space of this small chair. The weight of your form barely held up by your screaming muscles. You attempt to put your weight down and finally rest your wheezing form. <br><br>
+
+Yet as you settle into your chair, your stomach spreading over your legs, which themselves are stuck wide with their bloated width, you hear a strange snapping sound below you...<br><br> 
+
+<<linkreplace "Oh no...">>For a few moments, gravity seems to have stopped working. Everything on your body feels much lighter before it comes crashing down against the ground upon a pile of splinters. You down around you, though you're still not able to see the chair, you know it's long gone. You try your best to lift yourself up from your embarrassment, yet after a few tries which make you look like a beached fish, someone helps you up to your feet.<br><br>
+
+Phil stops by and apologizes for the sudden failure, and asks if you could head home for the rest of the day. Though his questions about what had happened are far more interested and direct then what you were expecting...<br><br>
+
+[[You head home...|houseHub]]
+<</linkreplace>>
 :: workJamie [nobr]
 
 As you begin your workday, drudging through the many different documents sent your way to sort and assign. Someone stops by... <br><br>
@@ -56,10 +96,10 @@ As you begin your workday, drudging through the many different documents sent yo
 [[Why do you look so... disinterested?|jamieWhy]]<br><br>
 
 <<set $npcFlags.jamie++>><i>Your relationship with this person has begun!</i>
-<<work [[Okay, can do!|workEndOfDay]] 240 6>>
+<<work [[Okay, can do!|workLunch]] 240 6>>
 <<else>>
 <i> This hasn't been written yet!</i><br>
-<<work [[workEndOfDay]] 240 3>>
+<<work [[workLunch]] 240 $tempeffort>>
 <</if>>
 :: jamieWho [nobr]
 
@@ -67,7 +107,7 @@ You ask as nicely as you can who this individual who so brazenly approached your
 
 [[What are these papers?|jamieWhat]]<br>
 [[Why do you look so... disinterested?|jamieWhy]]<br>
-<<work [[Okay, can do!|workEndOfDay]] 240 6>>
+<<work [[Okay, can do!|workLunch]] 240 6>>
 
 :: jamieWhat [nobr]
 You motion towards the papers as you attempt to inquire what these physical forms actually are and instead get an annoyed huff. <<nm "jamie" "Just... papers that need to be digitized, is that not... like, your job?">> She asks. <br><br>
@@ -83,13 +123,13 @@ Disregarding any niceties, you straight up ask the girl why she looks so disinte
 <<nm "jamie" "I- Can you just please deal with these papers?">> Jamie says as she finally collects herself. <br><br>
 
 [[What are these papers?|jamieWhat]]<br>
-<<work [[Okay, can do!|workEndOfDay]] 240 6>><br><br>
+<<work [[Okay, can do!|workLunch]] 240 6>><br><br>
 <i>Relationship with Jamie increased by one point!</i> <<set $npcFlags.jamie++>>
 :: jamieYes [nobr]
 
 <<nm "jamie" "Great. Then why are we even arguing? Please just get them figured out or Phil will have both of our asses.">>
 
-<<work [[Okay!|workEndOfDay]] 240 6>>
+<<work [[Okay!|workLunch]] 240 6>>
 
 :: jamieNo [nobr]
 <<nm "jamie" "W- What? But I thought that's why Phil... wait, what did you say your name was again?">> Jamie asks, seemingly entirely caught off guard.<br><br>
@@ -98,7 +138,7 @@ You explain to Jamie that you didn't say what your name was, and that it is <<ka
 
 <<nm "jamie" "Oh... oh shit. I- I gotta go...">> Jamie's face falls pale as she speaks, realizing that she must have messed up in some way before rushing off down the hallway. You don't see where she goes.<br><br>
 
-<<work [[Huh, weird.|workEndOfDay]] 240 3>><br><br>
+<<work [[Huh, weird.|workLunch]] 240 $tempeffort>><br><br>
 
 <i>Relationship with Jamie has gone up by one point!</i><<set $npcFlags.jamie++>>
 
@@ -118,16 +158,8 @@ You explain to Jamie that you didn't say what your name was, and that it is <<ka
 
 <<nm "jamie" "Oh... oh shit. I- I gotta go...">> Jamie's face falls pale as she speaks, realizing that she must have messed up in some way before rushing off down the hallway. You don't see where she goes.<br><br>
 
-<<work [[Huh, weird.|workEndOfDay]] 240 3>><br><br>
-:: workFat
+<<work [[Huh, weird.|workLunch]] 240 $tempeffort>><br><br>
 
-<<if $player.fatlevel > 3 && $workFlags.lastWeight == 0>>
-<<elseif $player.fatlevel > 5 && $workFlags.lastWeight == 1>>
-<<elseif $player.fatlevel > 7 && $workFlags.lastWeight == 2>><<goto[[workFat]]>>
-<<elseif $player.fatlevel > 9 && $workFlags.lastWeight == 3>><<goto[[workFat]]>>
-<<elseif $player.fatlevel > 11 && $workFlags.lastWeight == 4>><<goto[[workFat]]>>
-<</if>>
-[[Get to work...|workJob]]
 :: workDonut [nobr]
 
 Murmurs of someone bringing donuts of some variety are whispered through the cubicles. You crane your head in curiosity, yet from where you sit you have no view of the break room. <br><br>
@@ -141,13 +173,13 @@ Do you stand up to investigate? <br><br>
 
 You think better of going and eating some donuts. It's probably best for your weight. 
 
-<<work [[Continue working...|workEndOfDay]] 240 3>>
+<<work [[Continue working...|workLunch]] 240 $tempeffort>>
 :: workDonutYes [nobr]
-<<if $player.fatlevel > 4>>
+<<if $player.fatlevel < 4>>
 You hoist yourself up from your desk, prying your bloated behind from the chair and begin to walk over to the break area. Your destination of fatting food making the rubbing of your thighs more apparent in your mind. <br><br>
 
 Yet, as you expected, there are indeed donuts in the break room. A good number in fact, three whole boxes of a dozen each. There are glazed, frosted, bear claws, anything and everything you could have ever wanted. Your mouth waters at the temptation. <br><br>
-<<elseif $player.fatlevel > 6>>
+<<elseif $player.fatlevel < 6>>
 You wrench yourself up from your desk, having to try a few times to get your massive ass out of your very undersized chair, before waddling slowly over to the break room. Despite your best efforts, even at the fifty or so feet that you had walked, you find yourself slowly growing out of breath. <br><br>
 
 Yet, as you expected, there are indeed donuts in the break room. A good number in fact, three whole boxes of a dozen each. There are glazed, frosted, bear claws, anything and everything you could have ever wanted. Your mouth waters at the temptation, and you find yourself instinctually reaching for one. <br><br>
@@ -160,7 +192,7 @@ A good number in fact, three whole boxes of a dozen each. There are glazed, fros
 
 What do you do? <br><br>
 
-    <<if $player.gluttony <= 3>>
+    <<if $player.gluttony <= 3 || $player.fullness >= 60>>
         <<if $player.maxFullness - $player.fullness > 20>>
             <<link [[Eat just one...|toEat]]>>
                 <<set $donuts ={
@@ -177,7 +209,7 @@ What do you do? <br><br>
             <<else>><br>
         <</if>>
     <</if>>
-    <<if $player.gluttony <= 5>>
+    <<if $player.gluttony <= 5 || $player.fullness >= 40>>
         <<if $player.maxFullness - $player.fullness > 60>>
         <<link [[Eat a couple...|toEat]]>>
             <<set $donuts ={
@@ -230,7 +262,7 @@ What do you do? <br><br>
     <</if>>
 <br>
 
-<<if $player.gluttony < 3 || $player.fullness >= $player.maxFullness/2>><<work [[Leave|workEndOfDay]] 240 3>><</if>>
+<<if $player.gluttony < 3 || $player.fullness >= $player.maxFullness/2>><<work [[Leave|workLunch]] 240 $tempeffort>><<unset $donuts>><</if>>
 :: workIntro [nobr]
 "Van Papers"<br><br>
 
@@ -245,7 +277,9 @@ You had hoped that whatever job you had been offered would be somewhat interesti
 How do you approach this situation?<br><br>
 <<link [[Confidently|workIntroConfident]]>><<set $player.confidence = 30>><</link>><br>
 <<link [[Meek|workIntroMeek]]>><<set $player.confidence = 10>><</link>><br>
-<<link [[Calm|workIntroCalm]]>><<set $player.confidence = 20>><</link>><br>
+<<link [[Calm|workIntroCalm]]>><<set $player.confidence = 20>><</link>><br><br><br>
+
+<<if $option.dev == true>>[[Dev Skip|workHub]]<<set $firstTime.work = false>><</if>>
 
 :: workIntroConfident [nobr]
 You confidently annouce your presense as you hear your name called, more than ready to get this show on the road and get this next chapter in your life started. <br><br>
@@ -334,20 +368,160 @@ Ryan rubs the back of his neck as you sit in your chair patiently. <<nm "ryan" "
 
 As Ryan speaks his hands move around in big circles and he points towards different places in the building. <<nm "ryan" "um, don't worry! I'll include instructions on what to do and how to do it but uh, don't mess up I guess. That's about it though- oh! if you work hard you might get a raise, so make sure to um... put your back into it.">><br><br>
 
-<i>Mechanics of <b>work!</b><br><br>
-So basically, everytime you go to work you'll be 'tested' mechanically against a few different traits. How late you are, how much tired you are, and well you can do your job.<br><br>
+<<link "continue">><<goto [[workJob]]>><<set $tempeffort = 3>><<set $firstTime.work = false>><</link>><br><br>
 
-If all of those are good, you'll do good! If one of those is bad, you'll do okay, if more than one of those are bad... Well, maybe you'll run into some problems.</i><br><br>
+<<linkreplace "Work Instructions...">><<dn "dev" "<i><b>The Basics of Work.</b><br>1. Make you're on time.<br>2. Make sure you're able to do your job.<br>3. You get paid at the end of the week.<br><b>Pro tip!</b> Getting fat will probably make it harder to work, unless you workout to get stronger and be able to hold your arms up without being out of breath and straving.</i>">><</linkreplace>>
 
-<<link "continue">><<goto [[workJob]]>><<set $firstTime.work = false>><</link>>
+:: workLunch [nobr]
 
+Midway through your day, lunch time arrives! Did you bring any food, do you want to eat at the company cafe or are you going to skip lunch?<br><br>
+
+<<if $food.amount > 0>>[[Brought food.|workLunchFood]]<br><<else>><i>You do not have any food to bring from home!</i><</if>><br>
+[[Buy Cafe Food.|workLunchCafe]]<br>
+<<if $player.fatlevel > 7 || $player.gluttony > 6 && $player.hunger < 300>><i>You feel a loud gurgle in your stomach at the thought of food, you feel as if you can't skip lunch even if you wanted too...</i>
+<<else>>[[Skip Lunch.|workEndOfDay]]<</if>>
+
+
+:: workLunchFood [nobr]
+
+How much food did you bring from home? 
+
+<<if $food.amount < 500>>You do not have any food to eat!<br><br><<else>>
+    
+    <<if $player.gluttony <= 3 && $food.amount >= 250>>
+        <<if $player.maxFullness - $player.fullness > 30>>
+            <<link [[Eat a Small Meal|toEat]]>>
+                <<set $foodItem = $smallMeal>><<set $food.amount -= 250>>
+            <</link>><br>
+            <<else>>You are too full to eat a Small Meal!<br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony <= 5 && $food.amount >= 500>>
+        <<if $player.maxFullness - $player.fullness > 60>>
+        <<link [[Eat a Normal Meal|toEat]]>>
+            <<set $foodItem = $normalMeal>>
+            <<set $food.amount -= 500>>
+        <</link>><br>
+            <<else>>You are too full to eat a Normal Meal!<br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=3 && $food.amount >= 1000>>
+        <<if $player.maxFullness - $player.fullness > 120>>
+        <<link [[Eat a Large Meal|toEat]]>>
+            <<set $foodItem = $largeMeal>>
+            <<set $food.amount -= 1000>>
+        <</link>><br>
+            <<else>>You are too full to eat a Large meal!
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=5 && $food.amount >= 2000>>
+        <<if $player.maxFullness - $player.fullness > 240>>
+        <<link [[Eat a Huge Meal|toEat]]>>
+            <<set $foodItem = $hugeMeal>>
+            <<set $food.amount -= 2000>>
+        <</link>><br>
+            <<else>>You are too full to eat a Huge meal!
+        <</if>>
+    <</if>>
+<br>
+<</if>>
+<<if $player.fatlevel > 7 || $player.gluttony > 6 && $player.hunger < 300>><i>That gurgle in your stomach grows into a large growl at the sight and smell of such wonderful meals, you know you couldn't stop even if you tried.</i>
+<<else>>[[Finish up working...|workEndOfDay]]<</if>>
+
+:: workLunchCafe [nobr]
+
+You enter the cafe at your work, a man stands at a counter not far from you with a menu over his shoulder. You can hear the sounds of frying food, metal cooking implements hitting hard surfaces, and the talking of the cooking staff. A collection of tables ready for anyone to sit upon surrounds you, some even occupied already. What would you like to do?<br><br>
+
+    <<if $player.gluttony <= 3 && $player.money > 5>>
+        <<if $player.maxFullness - $player.fullness > 30>>
+            <<link [[Order a Small Meal $5|toEat]]>>
+                <<set $foodItem = $smallMeal>><<set $player.money -= 5>>
+            <</link>><br>
+            <<else>>You are too full to eat a Small Meal!<br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony <= 5 && $player.money > 10>>
+        <<if $player.maxFullness - $player.fullness > 60>>
+        <<link [[Order a Medium Meal $10|toEat]]>>
+            <<set $foodItem = $normalMeal>>
+            <<set $player.money -= 10>>
+        <</link>><br>
+            <<else>>You are too full to eat a Normal Meal!<br>
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=3 && $player.money > 25>>
+        <<if $player.maxFullness - $player.fullness > 120>>
+        <<link [[Order a Large Meal $25|toEat]]>>
+            <<set $foodItem = $largeMeal>>
+            <<set $player.money -= 25>>
+        <</link>><br>
+            <<else>>You are too full to eat a Large meal!
+        <</if>>
+    <</if>>
+    <<if $player.gluttony >=5 && $player.money > 50>>
+        <<if $player.maxFullness - $player.fullness > 240>>
+        <<link [[Order a Huge Meal $50|toEat]]>>
+            <<set $foodItem = $hugeMeal>>
+            <<set $player.money -= 50>>
+        <</link>><br>
+            <<else>>You are too full to eat a Huge meal!
+        <</if>>
+    <</if>>
+<br>
+
+<<if $player.fatlevel > 7 || $player.gluttony > 6 && $player.hunger < 300>><i>That gurgle in your stomach grows into a large growl at the sight and smell of such wonderful meals, you know you couldn't leave even if you tried.</i>
+<<else>>[[Leave.|workEndOfDay]]<</if>>
+:: philBadTalk [nobr]
+<<set $workFlags.infrac = 0>>
+You failed at your job enough to get Phil involved! Thankfully, this hasn't been written yet so you get off scotfree! I'd recommend losing weight and going for a few walks! Back to home with you. 
+
+[[houseHub]]
 :: workEndOfDay [nobr]
-It's the end of the day! Is there anything you'd like to do before you leave?<br><br>
+<<set $workFlags.daysWorked++>>
+<<if $currentday.dayofweek == 5>>
+<<for _i = 1; _i <= $workFlags.daysWorked; _i++>>
+    <<set $player.money += 100>>
+    <<set _moneyEarned +=100>>
+<</for>>
+<<if _moneyEarned > 0>><<set $workFlags.daysWorked = 0>><</if>>
+<i>Payday!</i> You earned _moneyEarned!<br><br>
+<</if>>
+<<if $workFlags.infrac > 3>><<goto "philBadTalk">><</if>>
+<<if $player.str > $player.fatlevel+2>><<set _tempstr = $player.fatlevel+2>><<else>><<set _tempstr = $player.str/10>><</if>>
+<<set _result = (5*$workFlags.effort)-($player.fatlevel-_tempstr)-($player.gluttony/2)>>
+<<if $player.fatlevel < 3>>
+You quickly got in a routine while working. Sorting and setting up all of the information you were given get's easier the more you do it. The day went by in a breeze and you feel more then prepared for the next.
+<<elseif $player.fatlevel < 5>>
+You quickly got into a routine while working. Sorting and setting up all of the spreadsheets full of information you have no context for, it's gotten easier the more you do it. Though, it's definitely getting difficult to not notice the level of heft your body now holds. The way your body jiggles slightly as you move your arm, the way your stomach rests against your legs. It's not to the point where it's getting to heavily in the way of your work, but it's getting dangerous.
+<<elseif $player.fatlevel < 7>>
+It was difficult to get your work done. Your stomach presses heavily against your desk, your arms are sore and exhausted, your legs are numb from their pressure, and your back is stiff from holding your self upright. Sitting in this chair everything feels so cramped and you feel so large. As your weight piles on this cubicle you sit in get's smaller and smaller. 
+<<elseif $player.fatlevel < 9>>
+Work is diffuclt, if you even got any done today at all. You're body is on fire just from moving itself around. You're bloated bingo winged arms feel like lead weights against your side as your weak breaths seemingly echo throughout the office room. Your stomach presses heavily against the desk, as if you gave it space, you wouldn't even be able to reach it. Not to mention even with the new chair you now have, you're ass presses heavily against the chair arms. It feels like everyones eyes are on you, for you have gained an ungodly amount of weight in such a short time and it is infinitely apparent how much that has affected your ability to work. 
+<<elseif $player.fatlevel < 16>>
+You have no idea how you're standing, even working. You don't fit in your chair, and you arms, which almost always sit at a 75 degree angle pressed up against your wobbling sides, have barely enough dexterity to do your jobs. You are constantly wheezing attempt to catch whatever breath is gracefully outrunning you, and all effort you put into your work seems to take all of the little energy you have left right out of your system. 
+<</if>><br>
+<<if $player.gluttony > 2 && $player.gluttony < 4>>
+You get strange hunger pangs while sitting at your desk. You do your best to ignore them for now. <br><br>
+<<elseif $player.gluttony < 6>>
+The hunger that sits within you forces you to go and grab a snack every once in a while, just for a brief respite. <br><br>
+<<elseif $player.gluttony < 8>>  
+That strange hunger that sits within you has grown to a near constant need to be eating something. Your hand constantly is slamming into some sort of cheap snack that is somehow always sitting upon your desk.<br><br>  
+<<elseif $player.gluttony < 10>>
+Good god, how did you let yourself get this low? You're always stuffing yourself with food. 
+<br><br>
+<</if>>
+<<if $player.sweat >= 1>>
+<</if>>
+<<if _result >= 10>>You feel as if you did a good job.
+<<elseif _result >= 6>>You didn't do as good of a job as you were hoping, and it's possible that others noticed.
+<<elseif _result < 6>>You barely did anything all day, or the work you did was so haphazard that you don't even know if it mattered. It's almost a certainty that others noticed your poor performance.<<set $workFlags.infrac++>>
+<</if>>
+<br><br>
 
-<<if $npcFlags.jamie > 0>>[[Go talk to Jamie?|workJamieTalk]]<br><</if>>
-<<if $npcFlags.ryan > 0>>[[Go talk with Ryan?|workRyanTalk]]<br><</if>>
-<<if $npcFlags.phil > 0>>[[Go talk with Phil?|workPhilTalk]]<br><</if>>
-<<if $npcFlags.gary > 0>>[[Go talk with Gary?|workGaryTalk]]<br><</if>>
-<<if $npcFlags.sarah > 0>>[[Go talk with Sarah?|workSarahTalk]]<br><</if>>
+<<if $npcFlags.jamie >= 1>>[[Go talk to Jamie?|workJamieTalk]]<br><</if>>
+<<if $npcFlags.ryan >= 1>>[[Go talk with Ryan?|workRyanTalk]]<br><</if>>
+<<if $npcFlags.phil >= 1>>[[Go talk with Phil?|workPhilTalk]]<br><</if>>
+<<if $npcFlags.gary >= 1>>[[Go talk with Gary?|workGaryTalk]]<br><</if>>
+<<if $npcFlags.sarah >= 1>>[[Go talk with Sarah?|workSarahTalk]]<br><</if>>
 
-<<work [[Finish up for the day...|townHub]] 240 3>>
+<br><<work [[Finish up for the day...|townHub]] 240 $tempeffort>>

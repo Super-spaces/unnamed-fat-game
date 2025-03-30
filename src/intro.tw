@@ -1,5 +1,5 @@
-:: gameStart {"position":"1000,750"}
-<<nobr>>
+:: gameStart [nobr] {"position":"1000,750"}
+<<set _inInspect = true>>
 
 It's raining.<br><br>
 
@@ -29,9 +29,8 @@ unfamiliar to you. <<nm "Sharyl" "I swear, ye kid's these days have no concept o
 
 <</linkreplace>><</linkreplace>><</linkreplace>><</linkreplace>><</linkreplace>>
 
-<</nobr>>
-:: charSetup
-<<nobr>>
+:: charSetup [nobr]
+<<set _inInspect = true>>
 <<textbox "$playervar.name" "Kara" autofocus>><br><br>
 
 
@@ -39,9 +38,8 @@ unfamiliar to you. <<nm "Sharyl" "I swear, ye kid's these days have no concept o
 <<linkreplace "Limitations... (Dev Note)">>Early on I decided that the amount of work required to add more customization features would be detrimental to the quality of the story, at least in the beginning. For now we will be sticking to the female story, and hopefully coming back to create the male one in the end. .<</linkreplace>>
 <br><br>
 [[Continue...|gameBegin1]]
-<</nobr>>
-:: gameBegin1 {"position":"1000,900"}
-<<nobr>>
+:: gameBegin1 [nobr] {"position":"1000,900"}
+<<set _inInspect = true>>
 <<nm "Sharyl" "Oh! <<kara>>? What are you doing out so late!">> The rather intense older woman looks upon you harshly, and through her hushed tone she does little to hide her disapointment.<br><br> 
 
 <<linkreplace "Work..." t8n>>You tell Sharyl about your long day at work, these soul killing hours at Stamies have been eating away at you. Though not as much as the cold bite of the rain now nipped at your legs.<br><br>
@@ -60,30 +58,26 @@ You thank her for her hospitality. <<nm "Sharyl" "That's what these places are f
 <</linkreplace>>
 <</linkreplace>>
 <</linkreplace>>
-<</nobr>>
 
-
-:: gameBegin2
-<<nobr>>
+:: gameBegin2 [nobr]
+<<set _inInspect = true>>
 What do you do? <br><br>
 
 <<linkreplace "Look around.<br><br>" t8n>>You glance around the space before you, and it's evident that this is an immensely old building. Far older than any of the buildings you've seen around the city. The roughly shaped stone brick walls on the outside give way to long since worn down wooden floors and walls upon the inside. Furniture shaped by time sits unused in so many corners, while the stairs that Sharyl directed you to have divots themselves, a physical reminder of the amount of people this place has helped in it's time. <br><br><</linkreplace>> 
 
 [[Head Upstairs|gameBegin3]]
-<</nobr>>
 
-:: gameBegin3 
-<<nobr>>
+:: gameBegin3 [nobr]
+<<set _inInspect = true>>
 You wince as the steps creak beneath your feet, the stillness of the air around you being immediately disturbed by the piercing cry of old wood. The upstairs itself holds many rooms, the building being far larger than you first expected when you first arrived so many months ago. It has been a long and ardious journey, all things considered. now you were here, finally being able to get one foot under another. Though time would tell if that was for the best or not, your fast food job only paid so much, and from what you have heard rent in this city is absolutely attrocious. <br><br>
 
-But for now, none of that mattered. Because now, as you threw the letter given to you upon your bedstand, and climbed into your bed, you basked in the warmth of your cheap mattress and thick wool blanket and immediately fell asleep. 
+But for now, none of that mattered. Because now, as you threw the letter given to you upon your bedstand, and climbed into your bed, you basked in the warmth of your cheap mattress and thick wool blanket and immediately fell asleep. <br><br>
 
-<</nobr>>
 
 [[Sleep Cometh...| gameBegin4]]
 
-:: gameBegin4
-<<nobr>>
+:: gameBegin4 [nobr]
+<<set _inInspect = true>>
 As comfy as you were, the thin rays of piercing light did little to sustain your long sleep. Not that your ear shattering alarm clock wasn't going to finish the job soon enough. Reaching over you grab your clock and shut it off, though not before your hand runs across the letter you dropped there not but one restful night ago. <br><br>
 
 <<linkreplace "Take a look..." t8n>>The plain white envelope gave no hints on what went on within, though the large "Confidential Documents" label upon you feel a sharp spike of worry within your chest. The thickness of the envelope itself not helping matters. Expecting bills or some other bad news, you tear it open and pull out some of the many papers within. <br><br>
@@ -101,10 +95,9 @@ But what was there to lose?<br><br>
 
 <</linkreplace>>
 <</linkreplace>>
-<</nobr>>
 
-:: gameIntro 
-<<nobr>>
+:: gameIntro [nobr]
+<<set _inInspect = true>>
 The next two weeks of your life are more hectic then anything you've ever experienced. Only a day after shipping the documents to the request location, you are reached out via email to meet with an agent at their office quite literally down the street from the halfway house. <br><br>
 
 You meet with them, they introduce themselves as <b><<nm "agent" "Agent Taren">></b>, and they then describe to you how everything will be working. <br><br>
@@ -117,12 +110,11 @@ You nod, doing your best to hide your both indescrible excitement and intense fe
 
 Before you're able to exactly what the agent meant, he pushes you out the door and slams it behind you.
 
-<</nobr>>
 
 [[To the house...|houseIntro]]
 
-:: houseIntro 
-<<nobr>>
+:: houseIntro [nobr]
+<<set _inInspect = true>>
 A new city, a new home. A new start at a life you never had gotten before. What was going to happen? What are you going to do?<br><br>
 
 Those questions reverberate in your mind as the bumps rattle the bus you sit upon. Looking up, you see the sign just above the driver <i>Next Stop: Pingville</i>.<br><br>
@@ -138,9 +130,5 @@ You know that you don't have work until Tomorrow at 9 am, so it would seem you h
 
 [[Let's begin...|houseHub]]
 <</linkreplace>><</linkreplace>>
-
-<</nobr>>
-
-:: supermarketIntro
 
 :: parkIntro

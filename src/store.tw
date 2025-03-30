@@ -1,0 +1,45 @@
+:: storeHub [nobr]
+<<if $timedata.hour < 7 || $timedata.hour >= 24>>You arrive at the mall, though are quickly dissapointed to see it closed and locked up.<br><br>A sign sits upon the door: <i>Open from 7am to 12am.</i><br><br>[[Leave|preTownHub]]<<else>>
+<<if $firstTime.store == true>><<goto "storeIntro">><</if>>
+After a very long walk, you finally arrive to the large mall that sits at the center of this strange town. From the outside, it looks like any other mall you've seen in your life. A large concrete jungle of buildings all interconnected by large walkways with tall glass ceilings. <br>
+
+Standing before you, is the enterance. Three sets of large glass automatic sliding doors, a man off to the side ringing a bell for donations to a charity of some sort. A large mexican restaurant chain blares music out towards the parking lot, and the maze of stores within is clearly visible from the outside.<br>
+
+Where would you like to go?<br><br>
+
+<<move [[Foodcourt|storeCourt]] 5>><br>
+<<move [[Grocery Store|storeFoodHub]] 5>><br>
+<<move [[Clothing Store|storeClothing]] 5>><br>
+<<move [[Electronic Store|storeElectronics]] 5>><br>
+<<move [[Furniture Store|storeFurniture]] 5>><br><br>
+
+<<move [[Go Back|townHub]] 5>>
+<</if>>
+:: storeFoodHub [nobr]
+DEBUG: $food.amount <br>
+After wandering through the store, you enter the attached grocery store. Walls of produce surround you, and almost anything food related is easily found. What are you wanting to purchase?<br><br>
+
+<<if $player.money < 10>><i>You do not have enough money to purchase any food.<br></i><<else>>
+<<link [[Purchase a small amount of food. $10|storeFoodHub]]>><<set $player.money -= 10>><<set $food.amount += 500>><</link>><br>
+<<if $player.money > 20>><<link [[Purchase a decent amount of food. $20|storeFoodHub]]>><<set $player.money -= 20>><<set $food.amount += 1000>><</link>><</if>><br>
+<<if $player.money > 50>><<link [[Purchase a large amount of food. $50|storeFoodHub]]>><<set $player.money -= 50>><<set $food.amount += 2000>><</link>><</if>><br>
+<<if $player.money > 100>><<link [[Purchase a absurd amount of food. $100|storeFoodHub]]>><<set $player.money -= 100>><<set $food.amount += 3000>><</link>><</if>><br>
+<</if>><br>
+
+<<move [[Go Back|storeHub]] 5>>
+:: storeIntro [nobr]
+
+After a very long walk, you finally arrive to the large mall that sits at the center of this strange town. From the outside, it looks like any other mall you've seen in your life. A large concrete jungle of buildings all interconnected by large walkways with tall glass ceilings. <br><br>
+
+Standing before you, is the enterance. Three sets of large glass automatic sliding doors, a man off to the side ringing a bell for donations to a charity of some sort. A large mexican restaurant chain blares music out towards the parking lot, and the maze of stores within is clearly visible from the outside.<br><br>
+
+<<move [[Enter?|storeIntro2]] 5>>
+
+:: storeIntro2 [nobr]
+
+You enter the supermarket, seeing stores line both sides of the walls. From clothing to electronics, there is almost nothing you couldn't buy here. You walk further in, stumbling upon the massive food court that sits bustling with energy of the day. You see many different food stalls open for buisness, with many different types of food. Pizza, Burritos, Chili, Sushi, and so many more.<br><br>
+
+Though eventually you find yourself out of things to look at, the mall now ready for you to utilize fully, what will you do first?<br><br>
+
+<<set $firstTime.store = false>>[[Next...|storeHub]]
+

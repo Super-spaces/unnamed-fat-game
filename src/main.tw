@@ -16,7 +16,7 @@
 Unnamed Life Simulator
 
 :: Start [nobr] {"position":"1000,600"}
-<h6><i>Version 0.0.4 "The beginnings of the work update"</i></h6>
+$version
 Welcome to <b>Unnamed Life Simulator</b>!<br><br>
 
 This is a primarily weight gain focused text game that puts you the shoes of a (currently) female protaganist who is down on their luck and is given the chance to get back on their feet! Though it may be that this "chance" is far too good to be true.<br><br>
@@ -29,37 +29,16 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
 
 [[Skip Intro|houseHub]]<br><br>
 
-<hr>Flags<br>
+<hr>Options<br>
 <<if $flags.sweat == false>><<link 'Enable Sweat'>><<set $flags.sweat = true>><<goto 'Start'>><</link>><<else>><<link 'Disable Sweat'>><<set $flags.sweat = false>><<goto 'Start'>><</link>><</if>><br>
-<<if $flags.slob == false>><<link 'Enable Slob'>><<set $flags.slob = true>><<goto 'Start'>><</link>><<else>><<link 'Disable Slob'>><<set $flags.slob = false>><<goto 'Start'>><</link>><</if>>
+<<if $flags.slob == false>><<link 'Enable Slob'>><<set $flags.slob = true>><<goto 'Start'>><</link>><<else>><<link 'Disable Slob'>><<set $flags.slob = false>><<goto 'Start'>><</link>><</if>><br>
+<<if $option.dev == false>><<link 'Enable Dev'>><<set $option.dev = true>><<goto 'Start'>><</link>><<else>><<link 'Disable Dev'>><<set $option.dev = false>><<goto 'Start'>><</link>><</if>>
 /*[[Testing]]*/
-:: Testing {"position":"1150,600"}
-<<set _timetest = 1000>>
-<<timeLegible _timetest>>
-<<link "workout">><<strCheck 3 true>><</link>>
-<<nm "Sharyl" "Yuuuh, sa my duud">>
-
-<<move [[Ten Minutes|Testing]] 10>>
-<<move [[1 Hour|Testing]] 60>>
-
-<<work [[1 Hour of Easy Work|Testing]] 60 1>>
-<<work [[1 Hour of Medium Work|Testing]] 60 3>>
-<<work [[1 Hour of Hard Work|Testing]] 60 5>>
-<<work [[1 Hour of Extreme Work|Testing]] 60 9>>
-
-<<link [[Eat some highly fattening slime.|toEat]]>><<set $foodItem = $testSlime >><</link>>
-
-[[houseHub]]
-<<link "set aware">><<set $flags.isAware = 1>><</link>>
-:: toEat {"position":"1500,1200"}
-<<toEat>>
-<<return>>
-/*<<unset $foodItem>>*/
 
 :: transportInt [nobr]
-  <<strCheck 0 false>>
+  <<strCheck 3 true>>
+  <<set _adjust = random(0,2)>>
     <<switch $transport.method>>
-    <<set _adjust = random(0,2)>>
         <<case 0>>
           <<if _rollAmount < 3>>/* do a 25 minute mile */
             <<set _time = $transport.distance * 25>>
@@ -76,15 +55,13 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
                 With every step you take, you feel the significant amount of excess lard that sits upon your body sways and jiggles 
                 with inertia. It's taking everything you have to move with that heavy weight upon your body. Your apron like stomach sways,
                 the fat on your arms and legs shifts fat rubbing heavily against fat, and everything else jiggles. Within minutes you feel far more exhausted than you ever did
-                walking before. Though weighing almost double what you did before isn't helping. Sweat pours from your body
-                as your exhausted groans and <i>huffs</i> catch the glances of any concerned individuals walking past. 
+                walking before. Though weighing almost double what you did before isn't helping. <br><br><<sweat "Sweat pours from your body as your exhausted groans and <i>huffs</i> catch the glances of any concerned individuals walking past.">>
                 <br><br> <i>Hopefully it's not to late to work out...</i>
               <<elseif $player.fatlevel >= 9>>
                 Somehow, despite everything, your lard coated form is walking. Just to lift your absolute log of a leg takes everything that you have, and you
                 are walking. Be it your dedication to working out, or a miracle of ability, you are making your way to your destination... eventually. Your stomach,
                 if you could even call it that, it now begin more of a blanket of lard slapping against your thighs with each step, grumbles and groans as you fight
-                against your better instincts. Everything is now rubbing against everything, and everything is sore and hurts. Sweat absolutely soaks whatever clothing barely fit to your fat form. Your pathetic wheezing joins the sounds of your 
-                half hearted attempt to walk to your destination. 
+                against your better instincts. Everything is now rubbing against everything, and everything is sore and hurts. <<sweat "Sweat absolutely soaks whatever clothing barely fit to your fat form. Your pathetic wheezing joins the sounds of your  half hearted attempt to walk to your destination.">>
                 <br><br> <i> God, you're hungry...</i>
             <</if>>
           <<elseif _rollAmount < 6>>/* do a 18 minute mile */
@@ -116,7 +93,7 @@ Anyway, the game is currently in Pre-Alpha! As always that means that anything y
   <<include "transportEvent">>
   <<switch $transport.location>>
     <<case "Work">>Head to Work <<work [[Work|workHub]] _time _difficulty>>
-    <<case "Supermarket">>Head to 
+    <<case "Store">>Head to <<work [[Store|storeHub]] _time _difficulty>>
     <<case "Park">>Head to the Park <<work [[Park|parkHub]] _time _difficulty>>
   <</switch>>
 
@@ -137,8 +114,23 @@ You take a moment to look down at yourself. <i>WIP</i> <br><br>
 <<case 2>>You look down towards yourself, and from a glance you see you are a young woman of a healthy weight with no features of note. 
 <<case 3>>You look down towards yourself, and you see that your body has grown a bit fat all over. Your breasts are rather large and your gut is a fat dome upon your body, your butt sticks out a good bit more than before.
 <<case 4>>You look down towards yourself, and you realize that if you keep gaining weight, you'll soon see even less of yourself. Your breasts sit upon your fat stomach which sticks out a good foot from your chest, while your wide ass is like two watermelons behind you. You can barely see your legs, and you cannot see your crotch without a reflection.
-<<case 5>>You look down towards yourself, feeling your chin fold in on itself as your double chin gets in your way. You can only really see your large growing apron of a stomach, and your expanding two seat ass. Out of curiousity you look around to make sure no one is looking before grabbing the edges of your stomach, lifting it up and then dropping it. The feeling of it sloshing and jiggling is weirdly cathartic. 
+<<case 5>>You look down towards yourself, feeling your chin fold in on itself as the fat that surrounds your neck gets in your way. You can only really see your large growing apron of a stomach, and your expanding two seat ass. Out of curiousity you look around to make sure no one is looking before grabbing the edges of your stomach, lifting it up and then dropping it. The feeling of it sloshing and jiggling is weirdly cathartic. 
 <<case 6>>
 <</switch>>
 <</if>>
 <br><br><<return>>
+
+:: Testing {"position":"1150,600"}  
+
+<<link "workout">><<strCheck 3 true>><</link>>
+<<move [[Ten Minutes|Testing]] 10>>
+<<move [[1 Hour|Testing]] 60>>
+<<link [[make sweat|Testing]]>><<set $player.sweat = 1>><</link>>
+<<link [[Eat some highly fattening slime.|toEat]]>><<set $foodItem = $testSlime >><</link>>
+
+[[houseHub]]
+<<link "set aware">><<set $flags.isAware = 1>><</link>>
+:: toEat {"position":"1500,1200"}
+<<toEat>>
+<<return>>
+/*<<unset $foodItem>>*/

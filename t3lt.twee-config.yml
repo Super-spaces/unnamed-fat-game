@@ -27,3 +27,5 @@ sugarcube-2:
       name: kara
     sweat:
       name: sweat
+    dn:
+      name: dn

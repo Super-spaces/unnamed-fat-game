@@ -13,12 +13,21 @@ A kitchen that sits off to the right, a living room further into the room itself
 
 <<if $player.fatlevel >= 9 && $flags.houseExp == false>><<move [[Bathroom|bathroomStuck]] 10>> <i>You give a nervous glance towards the door, are you sure you'll fit?</i><br><<else>><<move [[Bathroom]] 1>><br><</if>>
 <<move [[Bedroom]] 1>><br>
-<<move [[Kitchen]] 1>><br><br>
-<<move [[Leave the House|preTownHub]] 3>><br>
+<<move [[Kitchen]] 1>><br>
+[[Waste time (1 hr)|wasteTime]]<br><br>
+<<move [[Leave the House|preTownHub]] 3>>
 
 
-[[Testing]]<br>
 
+<<if $option.dev == true>><br>[[Dev Zone|Testing]]<br><</if>>
+
+:: wasteTime [nobr]
+
+You find yourself bored while standing in your house. Though there isn't much to do to satisfy that boredom. You don't own a TV and you don't own a phone, but you own a laptop. <br><br>
+
+You end up watching videos on your laptop for an hour, it's a buffering and definitely annoying mess, but it does get the job done. <br><br>
+
+<<move [[Continue|houseHub]] 60>>
 :: bathroomStuck [nobr]
 
 You attempt to cram your massive lard bloated body through the much smaller doorframe that is before you. You can see the bathroom in front of you, the shower, the toilet, so tantalizing close. You take a labored micro step forward, feeling everything on your body slosh back and forth with the movement, your deep wheezing breathes echoing through the house, and immediately feel yourself slam against the tight doorframe. Your body jostles with the impact, like a massive pile of jello. You try again to take another step forward, but foot pushes you no further in, instead your body just sloshes against the door tauntingly.<br><br>
@@ -55,7 +64,7 @@ You enter your bathroom for the first time, it's not that large of a room, thoug
     
 <</if>>
 
-<<if $player.fatlevel < 7>> 
+<<if $player.fatlevel <= 7>> 
 <<move [[Step onto Scale|Scale]] 1>><br>
 <<move [[Step into Shower|Shower]] 1>><br><br>
 <<elseif $player.fatlevel <= 9>>
@@ -95,26 +104,31 @@ You currently weigh $display.weight kgs <br><br>
 
 You enter your bedroom. It's rather sparse at the moment, a strange painting of a flower sits off in the corner next to the shaded window in the center of the wall. You're bed sits in the center of the room, as you left it in the morning. To your right there is your mirror. <br><br>
 
-[[Sleep?|Bed]]<br>
-[[Mirror]] 
+[[Bed]]<br>
+[[Mirror]]<br>
 
 <<move [[Back|houseHub]] 1>>
 
-:: Bed
+:: Bed [nobr]
 <<nobr>>
     /*Finish here! */
     <<switch $player.fatlevel>>
-    <<case 1>>
-    <<case 2>>You crawl into bed, pulling the large rather fluffy blanket over your shoulder and snuggle up against the pillow. Closing your eyes for a quick bit of rest. <br><br>
-    <<case 3>>
-    <</switch>>
-    How long would you like to sleep?<br><<textbox "$sleepTime" 9 "sleepCheck">>
+    <<case 1>>skinny filler text
+    <<case 2>>You crawl into bed and tuck yourself in with your fluffy blanket. 
+    <<case 3>>You crawl into bed and tuck yourself in with your fluffy blanket. 
+    <<case 4>>You crawl into bed and tuck yourself in with your fluffy blanket, though you feel a bit strange as the blanket seems to be a bit tighter than before. 
+    <<case 5>>You crawl into bed and tuck yourself in with your fluffy blanket. Though you can't help but feel the distinct buldge of your hips against the bed pushing your backside up a bit uncomfortably. Not to mention your stomach now hangs down and spreads out in front of you.
+    <</switch>> <br><br>
+    <<linkreplace "Rest">>How long would you like to rest? (Type and press enter.)<br><<textbox "$sleepTime" 9 "restCheck">><</linkreplace>><br>
+    <<if $currentday.time >= 68400 || $currentday.time <= 10800>>[[Sleep|sleepCheck]]<<else>><i>It's too early to sleep!</i><</if>>
 <</nobr>>
-:: sleepCheck
+:: restCheck
+
 <<if $sleepTime < 0>><<set $sleepTime = 0>><</if>>
 <<if $sleepTime > 12>><<set $sleepTime = 12>><</if>>
 <<set $sleptHours = 0>>
 <<for _i = 0; _i lt $sleepTime; _i++>>
+    <<timeMachine>>
     <<if $player.fatigue < 8>><<set $player.fatigue = 0>><<break>><</if>>
     <<if $player.fatigue > 0>>
     <<set $player.fatigue -= 8>>
@@ -143,9 +157,49 @@ You enter your bedroom. It's rather sparse at the moment, a strange painting of 
 <<set $flags.lastSlept = 0>>
 <<unset $sleepTime>>
 <<goto "postSleep">>
+
+:: sleepCheck [nobr]
+<<set _test = 0>>
+<<set _test1 = 0>>
+<<set $sleepTime = 9>>
+<<set $sleptHours = 0>>
+<<for _i = -4; _i lt $sleepTime; _i++>>
+    <<timeMachine>>
+    <<set _currentHour to Math.floor(($currentday.time/60)/60)>>
+    <<if _currentHour > 9>><<set _currentHour = 0>><<set _test++>><</if>>
+    <<if $player.fatigue < 8>><<set $player.fatigue = 0>><</if>>
+    <<if _currentHour <= 4>>
+    <<set _test1++>>
+    <<set $player.fatigue -= 8>>
+    <<set $currentday.time += 60*60>>
+    <<set _hourToMin = 60>>
+    <<if $player.fullness > 0>>
+        <<set $player.fullness = $player.fullness-(_hourToMin*.5)*(.5*$player.digestRate)>>
+        <<set $player.weight = $player.weight+($player.gainRate*(_hourToMin*0.28))>>
+    <</if>>
+    <<set $player.weight -= (_hourToMin*.01)>>
+    <<if $player.hunger > 0>>
+        <<set $player.hunger -= (_hourToMin*.5)+($player.gluttony*.1)>>
+    <</if>>
+            /*stretching */
+            <<if _minute % 10 == 6 || _minute % 10 == 3 || _minute % 10 == 9>>
+                <<if $player.fullness >= $player.fullness*.75 && $rand <= 3>>
+                    <<if $rand <= 1>><<set $player.gluttony += 1>><</if>>
+                    <<set $player.maxFullness += 5>>
+                <</if>>
+            <</if>>
+    <<else>>
+    <<break>>
+    <</if>>
+    <<set $sleptHours++>>
+<</for>>
+<<set $flags.lastSlept = 0>>
+<<unset $sleepTime>>
+<<goto "postSleep">>
+[[postSleep]]
 :: postSleep
 
-You successfully slept $sleptHours!
+You successfully slept/rested $sleptHours!
 
 [[Back|Bedroom]]
 
@@ -175,37 +229,37 @@ You walk into the kitchen, it's of vaguely modern design with some type of stone
 
 <<if $food.amount < 500>>You do not have any food to eat!<br><br><<else>>
     
-    <<if $player.gluttony <= 3 && $food.amount >= 500>>
+    <<if $player.gluttony <= 3 && $food.amount >= 250>>
         <<if $player.maxFullness - $player.fullness > 30>>
             <<link [[Eat a Small Meal|toEat]]>>
-                <<set $foodItem = $smallMeal>><<set $food.amount -= 500>>
+                <<set $foodItem = $smallMeal>><<set $food.amount -= 250>>
             <</link>><br>
             <<else>>You are too full to eat a Small Meal!<br>
         <</if>>
     <</if>>
-    <<if $player.gluttony <= 5 && $food.amount >= 1000>>
+    <<if $player.gluttony <= 5 && $food.amount >= 500>>
         <<if $player.maxFullness - $player.fullness > 60>>
         <<link [[Eat a Normal Meal|toEat]]>>
             <<set $foodItem = $normalMeal>>
-            <<set $food.amount -= 1000>>
+            <<set $food.amount -= 500>>
         <</link>><br>
             <<else>>You are too full to eat a Normal Meal!<br>
         <</if>>
     <</if>>
-    <<if $player.gluttony >=3 && $food.amount >= 2000>>
+    <<if $player.gluttony >=3 && $food.amount >= 1000>>
         <<if $player.maxFullness - $player.fullness > 120>>
         <<link [[Eat a Large Meal|toEat]]>>
             <<set $foodItem = $largeMeal>>
-            <<set $food.amount -= 2000>>
+            <<set $food.amount -= 1000>>
         <</link>><br>
             <<else>>You are too full to eat a Large meal!
         <</if>>
     <</if>>
-    <<if $player.gluttony >=5 && $food.amount >= 3000>>
+    <<if $player.gluttony >=5 && $food.amount >= 2000>>
         <<if $player.maxFullness - $player.fullness > 240>>
         <<link [[Eat a Huge Meal|toEat]]>>
             <<set $foodItem = $hugeMeal>>
-            <<set $food.amount -= 3000>>
+            <<set $food.amount -= 2000>>
         <</link>><br>
             <<else>>You are too full to eat a Huge meal!
         <</if>>
@@ -217,14 +271,20 @@ You walk into the kitchen, it's of vaguely modern design with some type of stone
 <<move [[Back|houseHub]] 1>>
 
 <</nobr>>
-:: fridge
+:: fridge [nobr]
+<<if $food.amount >= 8000>>You open your fridge door slowly, careful to not let the massive amount of food you have sitting within spill out. As before you is an entire months worth of food for the average person. <<if $player.gluttony > 4>><br><br><i>You feel like you could eat it all in one sitting...</i><</if>>
+<<elseif $food.amount >= 4000>>You open your fridge and see it fully stocked, ready to fuel any of the meals that you may want to eat. <<if $player.gluttony >= 6>><br><br><i>Is it enough...?</i><</if>>
+<<elseif $food.amount >= 2000>>You open your fridge and see it filled with all of the neccessities you may need to cook even the largest of meals. <<if $player.gluttony >= 3>><br><br><i>Right...?</i><</if>>
+<<elseif $food.amount >= 1000>>You open your fridge and see it filled with a good amount of food, if you restrain yourself and eat just as much as you need, this will last at least a few days. <<if $player.gluttony >= 4>><br><br><i>A lofty thought, it's too late for that now...</i><</if>>
+<<elseif $food.amount >= 500>>You open your fridge and see it filled with food, though it's definitely pretty thin, you probably have enough food for one or two meals. <<if $player.gluttony >= 3>><br><br><i>It's not nearly enough...</i><</if>>
+<<elseif $food.amount >= 250>>You open your fridge and see barely any food, you probably barely have enough for one meal. <<if $player.gluttony >= 3>><br><br><i>You need far more...</i><</if>>
+<<else>>You open your fridge and see that is empty. You probably need to go to the store to buy some. 
+<</if>><br><br>
 
-<<= $food.amount>>
+[[Back|Kitchen]]<br><br>
 
-DEBUG
-<<button "set +100">><<set $food.amount += 100>><<goto [[fridge]]>><</button>>
+<<dn "agent" "You currently have $food.amount food points.">>
 
-[[back|Kitchen]]
 
 :: preTownHub
 
@@ -249,9 +309,9 @@ As you go to leave your house, you consider for a moment how you will get to you
     <<case 4>>
 <</switch>>
 
-<<transport "Supermarket" 5>>
+<<transport "Store" 3>>
 <<transport "Work" 1>>
-<<transport "Park" .5>>
+/*<<transport "Park" .5>>*/Park <i>WIP</i>
 
 
 <<move [[Go Home|houseHub]] 10>>
@@ -275,7 +335,7 @@ You're too tired to go on a walk!<br><br>
 <<strCheck 3 true>>
 <<if $>>
     <<if $player.fatlevel < 3 && $player.strength < 10>>
-    You attempt to spend the next few minutes walking around the park, but immediately you realize how out of shape you. Even as skinny as you feel you are, by the time you finally get around the whole bar, your muscles are on fire, and your are entirely covered in sweat. 
+    You attempt to spend the next few minutes walking around the park, but immediately you realize how out of shape you are. Even as skinny as you feel, by the time you finally get around the whole park, your muscles are on fire, and your are entirely covered in sweat. 
     <<set _difficulty 10 >>
     <<elseif $player.fatlevel < 5>>
     <<elseif $player.fatlevel < 7>>
